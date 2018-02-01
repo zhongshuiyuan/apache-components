@@ -66,7 +66,7 @@ public class DefaultHttpRequestParserFactory implements HttpMessageParserFactory
 
     @Override
     public HttpMessageParser<HttpRequest> create(final SessionInputBuffer buffer,
-            final MessageConstraints constraints) {
+                                                 final MessageConstraints constraints) {
         return new DefaultHttpRequestParser(buffer, lineParser, requestFactory, constraints);
     }
 

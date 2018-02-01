@@ -32,17 +32,19 @@ import java.io.Serializable;
 import org.apache.httpcore.Header;
 import org.apache.httpcore.HeaderElement;
 import org.apache.httpcore.ParseException;
-import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.util.Args;
 
 /**
- * Basic implementation of {@link Header}.
+ * Implements a basic {@link Header}.
  *
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
 public class BasicHeader implements Header, Cloneable, Serializable {
+
+    private static final HeaderElement[] EMPTY_HEADER_ELEMENTS = new HeaderElement[] {};
 
     private static final long serialVersionUID = -5427236326487562174L;
 
@@ -50,46 +52,44 @@ public class BasicHeader implements Header, Cloneable, Serializable {
     private final String value;
 
     /**
-     * Constructor with name and value
+     * Constructs with name and value.
      *
      * @param name the header name
      * @param value the header value
      */
     public BasicHeader(final String name, final String value) {
-        super();
         this.name = Args.notNull(name, "Name");
         this.value = value;
     }
 
     @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
+    public HeaderElement[] getElements() throws ParseException {
+        if (this.getValue() != null) {
+            // result intentionally not cached, it's probably not used again
+            return BasicHeaderValueParser.parseElements(this.getValue(), null);
+        }
+        return EMPTY_HEADER_ELEMENTS;
+    }
+
+    @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
     @Override
     public String getValue() {
-        return this.value;
+        return value;
     }
 
     @Override
     public String toString() {
         // no need for non-default formatting in toString()
         return BasicLineFormatter.INSTANCE.formatHeader(null, this).toString();
-    }
-
-    @Override
-    public HeaderElement[] getElements() throws ParseException {
-        if (this.value != null) {
-            // result intentionally not cached, it's probably not used again
-            return BasicHeaderValueParser.parseElements(this.value, null);
-        } else {
-            return new HeaderElement[] {};
-        }
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 
 }

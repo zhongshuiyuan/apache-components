@@ -31,8 +31,8 @@ import java.io.IOException;
 
 import org.apache.httpcore.HttpRequest;
 import org.apache.httpcore.io.SessionOutputBuffer;
-import org.apache.httpcore.message.BasicLineFormatter;
 import org.apache.httpcore.message.LineFormatter;
+import org.apache.httpcore.message.BasicLineFormatter;
 
 /**
  * HTTP request writer that serializes its output to an instance of {@link SessionOutputBuffer}.

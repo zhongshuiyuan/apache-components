@@ -27,14 +27,14 @@
 
 package org.apache.httpcore;
 
+import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
+import org.apache.httpcore.util.Args;
+import org.apache.httpcore.util.LangUtils;
+
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.Locale;
-
-import org.apache.httpcore.annotation.ThreadingBehavior;
-import org.apache.httpcore.annotation.Contract;
-import org.apache.httpcore.util.Args;
-import org.apache.httpcore.util.LangUtils;
 
 /**
  * Holds all of the variables needed to describe an HTTP connection to a host.
@@ -316,7 +316,7 @@ public final class HttpHost implements Cloneable, Serializable {
     }
 
     /**
-     * @see Object#hashCode()
+     * @see java.lang.Object#hashCode()
      */
     @Override
     public int hashCode() {

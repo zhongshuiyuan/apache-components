@@ -26,13 +26,13 @@
  */
 package org.apache.httpcore.impl.pool;
 
+import java.io.IOException;
+
 import org.apache.httpcore.HttpClientConnection;
 import org.apache.httpcore.HttpHost;
-import org.apache.httpcore.annotation.Contract;
 import org.apache.httpcore.annotation.ThreadingBehavior;
+import org.apache.httpcore.annotation.Contract;
 import org.apache.httpcore.pool.PoolEntry;
-
-import java.io.IOException;
 
 /**
  * A very basic {@link PoolEntry} implementation that represents an entry

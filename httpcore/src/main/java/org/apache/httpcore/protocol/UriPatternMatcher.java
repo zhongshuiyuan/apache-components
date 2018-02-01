@@ -28,10 +28,13 @@
 package org.apache.httpcore.protocol;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
-import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.util.Args;
 
 /**
@@ -40,13 +43,14 @@ import org.apache.httpcore.util.Args;
  * Patterns may have three formats:
  * <ul>
  *   <li>{@code *}</li>
- *   <li>{@code *&lt;uri&gt;}</li>
- *   <li>{@code &lt;uri&gt;*}</li>
+ *   <li>{@code *<uri>}</li>
+ *   <li>{@code <uri>*}</li>
  * </ul>
  * <br>
  * This class can be used to resolve an object matching a particular request
  * URI.
  *
+ * @param <T> The type of registered objects.
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.SAFE)
@@ -57,6 +61,18 @@ public class UriPatternMatcher<T> {
     public UriPatternMatcher() {
         super();
         this.map = new HashMap<String, T>();
+    }
+
+    /**
+     * Returns a {@link Set} view of the mappings contained in this matcher.
+     *
+     * @return  a set view of the mappings contained in this matcher.
+     *
+     * @see Map#entrySet()
+     * @since 4.4.9
+     */
+    public synchronized Set<Entry<String, T>> entrySet() {
+        return new HashSet<Entry<String, T>>(map.entrySet());
     }
 
     /**

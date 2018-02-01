@@ -26,12 +26,6 @@
  */
 package org.apache.httpcore.pool;
 
-import org.apache.httpcore.annotation.Contract;
-import org.apache.httpcore.annotation.ThreadingBehavior;
-import org.apache.httpcore.concurrent.FutureCallback;
-import org.apache.httpcore.util.Args;
-import org.apache.httpcore.util.Asserts;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,6 +43,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
+import org.apache.httpcore.concurrent.FutureCallback;
+import org.apache.httpcore.util.Args;
+import org.apache.httpcore.util.Asserts;
 
 /**
  * Abstract synchronous (blocking) pool of connections.

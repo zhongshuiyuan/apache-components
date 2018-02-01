@@ -27,11 +27,11 @@
 
 package org.apache.httpcore;
 
-import java.io.Serializable;
-
-import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.util.Args;
+
+import java.io.Serializable;
 
 /**
  * Represents a protocol version. The "major.minor" numbering
@@ -188,7 +188,7 @@ public class ProtocolVersion implements Serializable, Cloneable {
      * Compares this protocol version with another one.
      * Only protocol versions with the same protocol name can be compared.
      * This method does <i>not</i> define a total ordering, as it would be
-     * required for {@link Comparable}.
+     * required for {@link java.lang.Comparable}.
      *
      * @param that      the protocol version to compare with
      *

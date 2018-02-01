@@ -53,6 +53,7 @@ import org.apache.httpcore.params.HttpParams;
  *
  * @since 4.0
  */
+@SuppressWarnings("deprecation")
 public interface HttpMessage {
 
     /**
@@ -88,7 +89,7 @@ public interface HttpMessage {
      *
      * @param name the name of the header to return.
      * @return the first header whose name property equals {@code name}
-     * or {@code null} if no such header could be found.
+     *   or {@code null} if no such header could be found.
      */
     Header getFirstHeader(String name);
 
@@ -100,7 +101,7 @@ public interface HttpMessage {
      *
      * @param name the name of the header to return.
      * @return the last header whose name property equals {@code name}.
-     * or {@code null} if no such header could be found.
+     *   or {@code null} if no such header could be found.
      */
     Header getLastHeader(String name);
 
@@ -124,7 +125,7 @@ public interface HttpMessage {
      * Adds a header to this message. The header will be appended to the end of
      * the list.
      *
-     * @param name  the name of the header.
+     * @param name the name of the header.
      * @param value the value of the header.
      */
     void addHeader(String name, String value);
@@ -141,7 +142,7 @@ public interface HttpMessage {
      * Overwrites the first header with the same name. The new header will be appended to
      * the end of the list, if no header with the given name can be found.
      *
-     * @param name  the name of the header.
+     * @param name the name of the header.
      * @param value the value of the header.
      */
     void setHeader(String name, String value);
@@ -171,17 +172,18 @@ public interface HttpMessage {
      * Returns an iterator of all the headers.
      *
      * @return Iterator that returns Header objects in the sequence they are
-     * sent over a connection.
+     *         sent over a connection.
      */
     HeaderIterator headerIterator();
 
     /**
      * Returns an iterator of the headers with a given name.
      *
-     * @param name the name of the headers over which to iterate, or
-     *             {@code null} for all headers
+     * @param name      the name of the headers over which to iterate, or
+     *                  {@code null} for all headers
+     *
      * @return Iterator that returns Header objects with the argument name
-     * in the sequence they are sent over a connection.
+     *         in the sequence they are sent over a connection.
      */
     HeaderIterator headerIterator(String name);
 
@@ -190,17 +192,17 @@ public interface HttpMessage {
      * {@link #setParams(HttpParams)}.
      *
      * @deprecated (4.3) use configuration classes provided 'org.apache.httpcore.config'
-     * and 'org.apache.http.client.config'
+     *  and 'org.apache.httpcore.client.config'
      */
     @Deprecated
     HttpParams getParams();
 
     /**
      * Provides parameters to be used for the processing of this message.
-     *
      * @param params the parameters
+     *
      * @deprecated (4.3) use configuration classes provided 'org.apache.httpcore.config'
-     * and 'org.apache.http.client.config'
+     *  and 'org.apache.httpcore.client.config'
      */
     @Deprecated
     void setParams(HttpParams params);

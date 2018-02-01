@@ -30,7 +30,6 @@ package org.apache.httpcore.protocol;
 import java.io.IOException;
 
 import org.apache.httpcore.HttpClientConnection;
-import org.apache.httpcore.HttpEntity;
 import org.apache.httpcore.HttpEntityEnclosingRequest;
 import org.apache.httpcore.HttpException;
 import org.apache.httpcore.HttpRequest;
@@ -39,10 +38,11 @@ import org.apache.httpcore.HttpStatus;
 import org.apache.httpcore.HttpVersion;
 import org.apache.httpcore.ProtocolException;
 import org.apache.httpcore.ProtocolVersion;
+import org.apache.httpcore.HttpEntity;
 import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.annotation.Contract;
-import org.apache.httpcore.util.EntityUtils;
 import org.apache.httpcore.util.Args;
+import org.apache.httpcore.util.EntityUtils;
 
 /**
  * {@code HttpRequestExecutor} is a client side HTTP protocol handler based

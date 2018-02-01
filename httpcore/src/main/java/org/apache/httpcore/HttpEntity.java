@@ -95,7 +95,7 @@ public interface HttpEntity {
      *
      * @return  the number of bytes of the content, or
      *          a negative number if unknown. If the content length is known
-     *          but exceeds {@link Long#MAX_VALUE Long.MAX_VALUE},
+     *          but exceeds {@link java.lang.Long#MAX_VALUE Long.MAX_VALUE},
      *          a negative number is returned.
      */
     long getContentLength();
@@ -140,7 +140,7 @@ public interface HttpEntity {
      *
      * @throws IOException if the stream could not be created
      * @throws UnsupportedOperationException
-     *  if entity content cannot be represented as {@link InputStream}.
+     *  if entity content cannot be represented as {@link java.io.InputStream}.
      *
      * @see #isRepeatable()
      */

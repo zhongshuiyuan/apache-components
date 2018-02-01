@@ -27,6 +27,10 @@
 
 package org.apache.httpcore.impl.io;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.httpcore.Header;
 import org.apache.httpcore.HttpException;
 import org.apache.httpcore.HttpMessage;
@@ -43,16 +47,13 @@ import org.apache.httpcore.params.HttpParams;
 import org.apache.httpcore.util.Args;
 import org.apache.httpcore.util.CharArrayBuffer;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Abstract base class for HTTP message parsers that obtain input from
  * an instance of {@link SessionInputBuffer}.
  *
  * @since 4.0
  */
+@SuppressWarnings("deprecation")
 public abstract class AbstractMessageParser<T extends HttpMessage> implements HttpMessageParser<T> {
 
     private static final int HEAD_LINE    = 0;
@@ -87,7 +88,7 @@ public abstract class AbstractMessageParser<T extends HttpMessage> implements Ht
         this.sessionBuffer = buffer;
         this.messageConstraints = HttpParamConfig.getMessageConstraints(params);
         this.lineParser = (parser != null) ? parser : BasicLineParser.INSTANCE;
-        this.headerLines = new ArrayList<>();
+        this.headerLines = new ArrayList<CharArrayBuffer>();
         this.state = HEAD_LINE;
     }
 

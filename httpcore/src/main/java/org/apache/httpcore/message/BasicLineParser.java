@@ -251,9 +251,8 @@ public class BasicLineParser implements LineParser {
 
 
 
-    public static
-        RequestLine parseRequestLine(final String value,
-                                     final LineParser parser) throws ParseException {
+    public static RequestLine parseRequestLine(final String value,
+                                               final LineParser parser) throws ParseException {
         Args.notNull(value, "Value");
 
         final CharArrayBuffer buffer = new CharArrayBuffer(value.length());
@@ -339,9 +338,8 @@ public class BasicLineParser implements LineParser {
 
 
 
-    public static
-        StatusLine parseStatusLine(final String value,
-                                   final LineParser parser) throws ParseException {
+    public static StatusLine parseStatusLine(final String value,
+                                             final LineParser parser) throws ParseException {
         Args.notNull(value, "Value");
 
         final CharArrayBuffer buffer = new CharArrayBuffer(value.length());
@@ -424,9 +422,8 @@ public class BasicLineParser implements LineParser {
 
 
 
-    public static
-        Header parseHeader(final String value,
-                           final LineParser parser) throws ParseException {
+    public static Header parseHeader(final String value,
+                                     final LineParser parser) throws ParseException {
         Args.notNull(value, "Value");
 
         final CharArrayBuffer buffer = new CharArrayBuffer(value.length());

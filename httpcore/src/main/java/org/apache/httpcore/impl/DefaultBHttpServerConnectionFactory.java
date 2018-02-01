@@ -27,7 +27,6 @@
 
 package org.apache.httpcore.impl;
 
-import org.apache.httpcore.HttpServerConnection;
 import org.apache.httpcore.HttpConnectionFactory;
 import org.apache.httpcore.HttpRequest;
 import org.apache.httpcore.HttpResponse;
@@ -37,6 +36,7 @@ import org.apache.httpcore.config.ConnectionConfig;
 import org.apache.httpcore.entity.ContentLengthStrategy;
 import org.apache.httpcore.io.HttpMessageParserFactory;
 import org.apache.httpcore.io.HttpMessageWriterFactory;
+import org.apache.httpcore.HttpServerConnection;
 
 import java.io.IOException;
 import java.net.Socket;

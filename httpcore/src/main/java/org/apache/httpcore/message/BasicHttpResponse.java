@@ -35,8 +35,8 @@ import org.apache.httpcore.HttpVersion;
 import org.apache.httpcore.ProtocolVersion;
 import org.apache.httpcore.ReasonPhraseCatalog;
 import org.apache.httpcore.StatusLine;
-import org.apache.httpcore.impl.DefaultHttpResponseFactory;
 import org.apache.httpcore.util.Args;
+import org.apache.httpcore.impl.DefaultHttpResponseFactory;
 
 /**
  * Basic implementation of {@link HttpResponse}.
@@ -47,11 +47,11 @@ import org.apache.httpcore.util.Args;
  */
 public class BasicHttpResponse extends AbstractHttpMessage implements HttpResponse {
 
-    private StatusLine          statusline;
-    private ProtocolVersion     ver;
+    private StatusLine statusline;
+    private ProtocolVersion ver;
     private int                 code;
     private String              reasonPhrase;
-    private HttpEntity          entity;
+    private HttpEntity entity;
     private final ReasonPhraseCatalog reasonCatalog;
     private Locale              locale;
 

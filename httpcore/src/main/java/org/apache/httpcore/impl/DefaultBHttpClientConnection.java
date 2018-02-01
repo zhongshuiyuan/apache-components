@@ -45,14 +45,13 @@ import org.apache.httpcore.config.MessageConstraints;
 import org.apache.httpcore.entity.ContentLengthStrategy;
 import org.apache.httpcore.impl.io.DefaultHttpRequestWriterFactory;
 import org.apache.httpcore.impl.io.DefaultHttpResponseParserFactory;
-
-import org.apache.httpcore.impl.entity.LaxContentLengthStrategy;
-import org.apache.httpcore.impl.entity.StrictContentLengthStrategy;
 import org.apache.httpcore.io.HttpMessageParser;
 import org.apache.httpcore.io.HttpMessageParserFactory;
 import org.apache.httpcore.io.HttpMessageWriter;
 import org.apache.httpcore.io.HttpMessageWriterFactory;
 import org.apache.httpcore.util.Args;
+import org.apache.httpcore.impl.entity.LaxContentLengthStrategy;
+import org.apache.httpcore.impl.entity.StrictContentLengthStrategy;
 
 /**
  * Default implementation of {@link HttpClientConnection}.

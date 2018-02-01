@@ -27,6 +27,12 @@
 
 package org.apache.httpcore.impl;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
+
 import org.apache.httpcore.HttpEntity;
 import org.apache.httpcore.HttpEntityEnclosingRequest;
 import org.apache.httpcore.HttpException;
@@ -35,22 +41,15 @@ import org.apache.httpcore.HttpResponse;
 import org.apache.httpcore.HttpServerConnection;
 import org.apache.httpcore.config.MessageConstraints;
 import org.apache.httpcore.entity.ContentLengthStrategy;
-import org.apache.httpcore.impl.entity.StrictContentLengthStrategy;
+import org.apache.httpcore.impl.entity.DisallowIdentityContentLengthStrategy;
+import org.apache.httpcore.impl.io.DefaultHttpRequestParserFactory;
+import org.apache.httpcore.impl.io.DefaultHttpResponseWriterFactory;
 import org.apache.httpcore.io.HttpMessageParser;
 import org.apache.httpcore.io.HttpMessageParserFactory;
 import org.apache.httpcore.io.HttpMessageWriter;
 import org.apache.httpcore.io.HttpMessageWriterFactory;
 import org.apache.httpcore.util.Args;
-
-import org.apache.httpcore.impl.entity.DisallowIdentityContentLengthStrategy;
-import org.apache.httpcore.impl.io.DefaultHttpRequestParserFactory;
-import org.apache.httpcore.impl.io.DefaultHttpResponseWriterFactory;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
+import org.apache.httpcore.impl.entity.StrictContentLengthStrategy;
 
 /**
  * Default implementation of {@link HttpServerConnection}.

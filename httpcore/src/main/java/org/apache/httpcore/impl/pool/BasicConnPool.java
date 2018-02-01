@@ -35,9 +35,9 @@ import org.apache.httpcore.annotation.Contract;
 import org.apache.httpcore.config.ConnectionConfig;
 import org.apache.httpcore.config.SocketConfig;
 import org.apache.httpcore.params.HttpParams;
-import org.apache.httpcore.pool.ConnPool;
 import org.apache.httpcore.pool.AbstractConnPool;
 import org.apache.httpcore.pool.ConnFactory;
+import org.apache.httpcore.pool.ConnPool;
 
 /**
  * A very basic {@link ConnPool} implementation that

@@ -27,12 +27,12 @@
 
 package org.apache.httpcore.params;
 
+import java.nio.charset.Charset;
+import java.nio.charset.CodingErrorAction;
+
 import org.apache.httpcore.config.ConnectionConfig;
 import org.apache.httpcore.config.MessageConstraints;
 import org.apache.httpcore.config.SocketConfig;
-
-import java.nio.charset.Charset;
-import java.nio.charset.CodingErrorAction;
 
 /**
  * @deprecated (4.3) provided for compatibility with {@link HttpParams}. Do not use.

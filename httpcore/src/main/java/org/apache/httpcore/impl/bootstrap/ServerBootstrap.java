@@ -26,6 +26,14 @@
  */
 package org.apache.httpcore.impl.bootstrap;
 
+import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+import javax.net.ServerSocketFactory;
+import javax.net.ssl.SSLContext;
+
 import org.apache.httpcore.ConnectionReuseStrategy;
 import org.apache.httpcore.ExceptionLogger;
 import org.apache.httpcore.HttpConnectionFactory;
@@ -49,14 +57,6 @@ import org.apache.httpcore.protocol.ResponseContent;
 import org.apache.httpcore.protocol.ResponseDate;
 import org.apache.httpcore.protocol.ResponseServer;
 import org.apache.httpcore.protocol.UriHttpRequestHandlerMapper;
-
-import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
-import javax.net.ServerSocketFactory;
-import javax.net.ssl.SSLContext;
 
 /**
  * @since 4.4
@@ -119,7 +119,7 @@ public class ServerBootstrap {
      * Sets connection configuration.
      * <p>
      * Please note this value can be overridden by the {@link #setConnectionFactory(
-     * HttpConnectionFactory)} method.
+     *HttpConnectionFactory)} method.
      */
     public final ServerBootstrap setConnectionConfig(final ConnectionConfig connectionConfig) {
         this.connectionConfig = connectionConfig;
@@ -138,7 +138,7 @@ public class ServerBootstrap {
      * Adds this protocol interceptor to the head of the protocol processing list.
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
-     * HttpProcessor)} method.
+     *HttpProcessor)} method.
      */
     public final ServerBootstrap addInterceptorFirst(final HttpResponseInterceptor itcp) {
         if (itcp == null) {
@@ -155,7 +155,7 @@ public class ServerBootstrap {
      * Adds this protocol interceptor to the tail of the protocol processing list.
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
-     * HttpProcessor)} method.
+     *HttpProcessor)} method.
      */
     public final ServerBootstrap addInterceptorLast(final HttpResponseInterceptor itcp) {
         if (itcp == null) {
@@ -172,7 +172,7 @@ public class ServerBootstrap {
      * Adds this protocol interceptor to the head of the protocol processing list.
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
-     * HttpProcessor)} method.
+     *HttpProcessor)} method.
      */
     public final ServerBootstrap addInterceptorFirst(final HttpRequestInterceptor itcp) {
         if (itcp == null) {
@@ -189,7 +189,7 @@ public class ServerBootstrap {
      * Adds this protocol interceptor to the tail of the protocol processing list.
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
-     * HttpProcessor)} method.
+     *HttpProcessor)} method.
      */
     public final ServerBootstrap addInterceptorLast(final HttpRequestInterceptor itcp) {
         if (itcp == null) {
@@ -206,7 +206,7 @@ public class ServerBootstrap {
      * Assigns {@code Server} response header value.
      * <p>
      * Please note this value can be overridden by the {@link #setHttpProcessor(
-     * HttpProcessor)} method.
+     *HttpProcessor)} method.
      */
     public final ServerBootstrap setServerInfo(final String serverInfo) {
         this.serverInfo = serverInfo;
@@ -242,7 +242,7 @@ public class ServerBootstrap {
      * matching the given pattern.
      * <p>
      * Please note this value can be overridden by the {@link #setHandlerMapper(
-     *   HttpRequestHandlerMapper)} method.
+     *HttpRequestHandlerMapper)} method.
      *
      * @param pattern the pattern to register the handler for.
      * @param handler the handler.
@@ -284,7 +284,7 @@ public class ServerBootstrap {
     }
 
     /**
-     * Assigns {@link ServerSocketFactory} instance.
+     * Assigns {@link javax.net.ServerSocketFactory} instance.
      */
     public final ServerBootstrap setServerSocketFactory(final ServerSocketFactory serverSocketFactory) {
         this.serverSocketFactory = serverSocketFactory;
@@ -292,10 +292,10 @@ public class ServerBootstrap {
     }
 
     /**
-     * Assigns {@link SSLContext} instance.
+     * Assigns {@link javax.net.ssl.SSLContext} instance.
      * <p>
      * Please note this value can be overridden by the {@link #setServerSocketFactory(
-     *   ServerSocketFactory)} method.
+     *   javax.net.ServerSocketFactory)} method.
      */
     public final ServerBootstrap setSslContext(final SSLContext sslContext) {
         this.sslContext = sslContext;

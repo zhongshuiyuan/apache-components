@@ -27,8 +27,8 @@
 
 package org.apache.httpcore.impl;
 
-import org.apache.httpcore.HttpClientConnection;
 import org.apache.httpcore.HttpConnectionFactory;
+import org.apache.httpcore.HttpClientConnection;
 import org.apache.httpcore.HttpRequest;
 import org.apache.httpcore.HttpResponse;
 import org.apache.httpcore.annotation.ThreadingBehavior;

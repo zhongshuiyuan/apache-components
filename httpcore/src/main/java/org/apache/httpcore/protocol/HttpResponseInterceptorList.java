@@ -27,9 +27,9 @@
 
 package org.apache.httpcore.protocol;
 
-import org.apache.httpcore.HttpResponseInterceptor;
-
 import java.util.List;
+
+import org.apache.httpcore.HttpResponseInterceptor;
 
 /**
  * Provides access to an ordered list of response interceptors.

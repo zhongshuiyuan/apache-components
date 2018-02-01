@@ -35,7 +35,7 @@ import org.apache.httpcore.ProtocolVersion;
  * @since 4.0
  *
  * @deprecated (4.3) use configuration classes provided 'org.apache.httpcore.config'
- *  and 'org.apache.http.client.config'
+ *  and 'org.apache.httpcore.client.config'
  */
 @Deprecated
 public interface CoreProtocolPNames {

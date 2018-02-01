@@ -37,7 +37,7 @@ import java.util.Set;
  * @since 4.0
  *
  * @deprecated (4.3) use configuration classes provided 'org.apache.httpcore.config'
- *  and 'org.apache.http.client.config'
+ *  and 'org.apache.httpcore.client.config'
  */
 @Deprecated
 public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames {
