@@ -31,7 +31,7 @@ compile 'com.yanzhenjie.apache:httpcore:4.4.8'
 <dependency>
   <groupId>com.yanzhenjie.apache</groupId>
   <artifactId>httpcore</artifactId>
-  <version>4.4.8</version>
+  <version>4.4.9</version>
   <type>pom</type>
 </dependency>
 ```
