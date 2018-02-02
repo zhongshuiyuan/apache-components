@@ -24,7 +24,7 @@ compile 'com.yanzhenjie.apache:fileupload:1.3.3'
 It comes from [Apache httpcomponents-core-ga](http://hc.apache.org/httpcomponents-core-ga/).  
 
 ```
-compile 'com.yanzhenjie.apache:httpcore:4.4.8'
+compile 'com.yanzhenjie.apache:httpcore:4.4.9'
 ```
 
 ```
