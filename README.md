@@ -16,7 +16,6 @@ compile 'com.yanzhenjie.apache:fileupload:1.3.3'
   <groupId>com.yanzhenjie.apache</groupId>
   <artifactId>fileupload</artifactId>
   <version>1.3.3</version>
-  <type>pom</type>
 </dependency>
 ```
 
@@ -24,14 +23,13 @@ compile 'com.yanzhenjie.apache:fileupload:1.3.3'
 It comes from [Apache httpcomponents-core-ga](http://hc.apache.org/httpcomponents-core-ga/).  
 
 ```
-compile 'com.yanzhenjie.apache:httpcore:4.4.9'
+compile 'com.yanzhenjie.apache:httpcore:4.4.10'
 ```
 
 ```
 <dependency>
   <groupId>com.yanzhenjie.apache</groupId>
   <artifactId>httpcore</artifactId>
-  <version>4.4.9</version>
-  <type>pom</type>
+  <version>4.4.10</version>
 </dependency>
 ```
