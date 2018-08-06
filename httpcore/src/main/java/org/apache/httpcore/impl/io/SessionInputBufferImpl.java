@@ -27,13 +27,6 @@
 
 package org.apache.httpcore.impl.io;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CoderResult;
-
 import org.apache.httpcore.MessageConstraintException;
 import org.apache.httpcore.config.MessageConstraints;
 import org.apache.httpcore.io.BufferInfo;
@@ -45,18 +38,23 @@ import org.apache.httpcore.util.Asserts;
 import org.apache.httpcore.util.ByteArrayBuffer;
 import org.apache.httpcore.util.CharArrayBuffer;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CoderResult;
+
 /**
- * Abstract base class for session input buffers that stream data from
- * an arbitrary {@link InputStream}. This class buffers input data in
- * an internal byte array for optimal input performance.
- * <p>
- * {@link #readLine(CharArrayBuffer)} and {@link #readLine()} methods of this
- * class treat a lone LF as valid line delimiters in addition to CR-LF required
- * by the HTTP specification.
+ * Abstract base class for session input buffers that stream data from an arbitrary {@link InputStream}. This
+ * class buffers input data in an internal byte array for optimal input performance. <p> {@link
+ * #readLine(CharArrayBuffer)} and {@link #readLine()} methods of this class treat a lone LF as valid line
+ * delimiters in addition to CR-LF required by the HTTP specification.
  *
  * @since 4.3
  */
-public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
+public class SessionInputBufferImpl
+  implements SessionInputBuffer, BufferInfo {
 
     private final HttpTransportMetricsImpl metrics;
     private final byte[] buffer;
@@ -75,22 +73,17 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
      *
      * @param metrics HTTP transport metrics.
      * @param buffersize buffer size. Must be a positive number.
-     * @param minChunkLimit size limit below which data chunks should be buffered in memory
-     *   in order to minimize native method invocations on the underlying network socket.
-     *   The optimal value of this parameter can be platform specific and defines a trade-off
-     *   between performance of memory copy operations and that of native method invocation.
-     *   If negative default chunk limited will be used.
-     * @param constraints Message constraints. If {@code null}
-     *   {@link MessageConstraints#DEFAULT} will be used.
-     * @param chardecoder chardecoder to be used for decoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for byte to char conversion.
+     * @param minChunkLimit size limit below which data chunks should be buffered in memory in order to
+     *   minimize native method invocations on the underlying network socket. The optimal value of this
+     *   parameter can be platform specific and defines a trade-off between performance of memory copy
+     *   operations and that of native method invocation. If negative default chunk limited will be used.
+     * @param constraints Message constraints. If {@code null} {@link MessageConstraints#DEFAULT} will be
+     *   used.
+     * @param chardecoder chardecoder to be used for decoding HTTP protocol elements. If {@code null} simple
+     *   type cast will be used for byte to char conversion.
      */
-    public SessionInputBufferImpl(
-            final HttpTransportMetricsImpl metrics,
-            final int buffersize,
-            final int minChunkLimit,
-            final MessageConstraints constraints,
-            final CharsetDecoder chardecoder) {
+    public SessionInputBufferImpl(final HttpTransportMetricsImpl metrics, final int buffersize,
+      final int minChunkLimit, final MessageConstraints constraints, final CharsetDecoder chardecoder) {
         Args.notNull(metrics, "HTTP transport metrcis");
         Args.positive(buffersize, "Buffer size");
         this.metrics = metrics;
@@ -103,9 +96,7 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         this.decoder = chardecoder;
     }
 
-    public SessionInputBufferImpl(
-            final HttpTransportMetricsImpl metrics,
-            final int buffersize) {
+    public SessionInputBufferImpl(final HttpTransportMetricsImpl metrics, final int buffersize) {
         this(metrics, buffersize, buffersize, null, null);
     }
 
@@ -224,19 +215,18 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
     }
 
     /**
-     * Reads a complete line of characters up to a line delimiter from this
-     * session buffer into the given line buffer. The number of chars actually
-     * read is returned as an integer. The line delimiter itself is discarded.
-     * If no char is available because the end of the stream has been reached,
-     * the value {@code -1} is returned. This method blocks until input
-     * data is available, end of file is detected, or an exception is thrown.
-     * <p>
-     * This method treats a lone LF as a valid line delimiters in addition
-     * to CR-LF required by the HTTP specification.
+     * Reads a complete line of characters up to a line delimiter from this session buffer into the given line
+     * buffer. The number of chars actually read is returned as an integer. The line delimiter itself is
+     * discarded. If no char is available because the end of the stream has been reached, the value {@code -1}
+     * is returned. This method blocks until input data is available, end of file is detected, or an exception
+     * is thrown. <p> This method treats a lone LF as a valid line delimiters in addition to CR-LF required by
+     * the HTTP specification.
      *
-     * @param      charbuffer   the line buffer.
-     * @return     one line of characters
-     * @throws  IOException  if an I/O error occurs.
+     * @param charbuffer the line buffer.
+     *
+     * @return one line of characters
+     *
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public int readLine(final CharArrayBuffer charbuffer) throws IOException {
@@ -255,8 +245,8 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
             }
 
             if (maxLineLen > 0) {
-                final int currentLen = this.linebuffer.length()
-                        + (pos >= 0 ? pos : this.bufferlen) - this.bufferpos;
+                final int currentLen =
+                  this.linebuffer.length() + (pos >= 0 ? pos : this.bufferlen) - this.bufferpos;
                 if (currentLen >= maxLineLen) {
                     throw new MessageConstraintException("Maximum line length limit exceeded");
                 }
@@ -293,20 +283,17 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
     }
 
     /**
-     * Reads a complete line of characters up to a line delimiter from this
-     * session buffer. The line delimiter itself is discarded. If no char is
-     * available because the end of the stream has been reached,
-     * {@code null} is returned. This method blocks until input data is
-     * available, end of file is detected, or an exception is thrown.
-     * <p>
-     * This method treats a lone LF as a valid line delimiters in addition
-     * to CR-LF required by the HTTP specification.
+     * Reads a complete line of characters up to a line delimiter from this session buffer. The line delimiter
+     * itself is discarded. If no char is available because the end of the stream has been reached, {@code
+     * null} is returned. This method blocks until input data is available, end of file is detected, or an
+     * exception is thrown. <p> This method treats a lone LF as a valid line delimiters in addition to CR-LF
+     * required by the HTTP specification.
      *
      * @return HTTP line as a string
-     * @throws  IOException  if an I/O error occurs.
+     *
+     * @throws IOException if an I/O error occurs.
      */
-    private int lineFromLineBuffer(final CharArrayBuffer charbuffer)
-            throws IOException {
+    private int lineFromLineBuffer(final CharArrayBuffer charbuffer) throws IOException {
         // discard LF if found
         int len = this.linebuffer.length();
         if (len > 0) {
@@ -323,15 +310,14 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         if (this.decoder == null) {
             charbuffer.append(this.linebuffer, 0, len);
         } else {
-            final ByteBuffer bbuf =  ByteBuffer.wrap(this.linebuffer.buffer(), 0, len);
+            final ByteBuffer bbuf = ByteBuffer.wrap(this.linebuffer.buffer(), 0, len);
             len = appendDecoded(charbuffer, bbuf);
         }
         this.linebuffer.clear();
         return len;
     }
 
-    private int lineFromReadBuffer(final CharArrayBuffer charbuffer, final int position)
-            throws IOException {
+    private int lineFromReadBuffer(final CharArrayBuffer charbuffer, final int position) throws IOException {
         int pos = position;
         final int off = this.bufferpos;
         int len;
@@ -344,14 +330,13 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         if (this.decoder == null) {
             charbuffer.append(this.buffer, off, len);
         } else {
-            final ByteBuffer bbuf =  ByteBuffer.wrap(this.buffer, off, len);
+            final ByteBuffer bbuf = ByteBuffer.wrap(this.buffer, off, len);
             len = appendDecoded(charbuffer, bbuf);
         }
         return len;
     }
 
-    private int appendDecoded(
-            final CharArrayBuffer charbuffer, final ByteBuffer bbuf) throws IOException {
+    private int appendDecoded(final CharArrayBuffer charbuffer, final ByteBuffer bbuf) throws IOException {
         if (!bbuf.hasRemaining()) {
             return 0;
         }
@@ -370,10 +355,8 @@ public class SessionInputBufferImpl implements SessionInputBuffer, BufferInfo {
         return len;
     }
 
-    private int handleDecodingResult(
-            final CoderResult result,
-            final CharArrayBuffer charbuffer,
-            final ByteBuffer bbuf) throws IOException {
+    private int handleDecodingResult(final CoderResult result, final CharArrayBuffer charbuffer,
+      final ByteBuffer bbuf) throws IOException {
         if (result.isError()) {
             result.throwException();
         }

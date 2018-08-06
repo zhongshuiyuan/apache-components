@@ -30,11 +30,11 @@ import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLServerSocket;
 
 /**
- * Server SSL setup handler. Custom implementations of this interface can be used to
- * configure various SSL protocol aspects such as supported protocol versions, cypher suites,
- * and mandatory / optional client authentication.
+ * Server SSL setup handler. Custom implementations of this interface can be used to configure various SSL
+ * protocol aspects such as supported protocol versions, cypher suites, and mandatory / optional client
+ * authentication.
  *
- * @see javax.net.ssl.SSLServerSocket
+ * @see SSLServerSocket
  * @see javax.net.ssl.SSLSession
  * @since 4.4
  */

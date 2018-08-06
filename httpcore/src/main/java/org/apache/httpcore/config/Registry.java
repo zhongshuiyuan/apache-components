@@ -27,8 +27,8 @@
 
 package org.apache.httpcore.config;
 
-import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
 
 import java.util.Locale;
 import java.util.Map;
@@ -40,13 +40,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.SAFE)
-public final class Registry<I> implements Lookup<I> {
+public final class Registry<I>
+  implements Lookup<I> {
 
     private final Map<String, I> map;
 
     Registry(final Map<String, I> map) {
         super();
-        this.map = new ConcurrentHashMap<String, I>(map);
+        this.map = new ConcurrentHashMap<>(map);
     }
 
     @Override

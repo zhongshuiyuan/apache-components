@@ -33,31 +33,30 @@ import org.apache.httpcore.HttpException;
 import org.apache.httpcore.HttpMessage;
 import org.apache.httpcore.ParseException;
 import org.apache.httpcore.ProtocolException;
-import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.entity.ContentLengthStrategy;
 import org.apache.httpcore.protocol.HTTP;
 import org.apache.httpcore.util.Args;
 
 /**
- * The lax implementation of the content length strategy. This class will ignore
- * unrecognized transfer encodings and malformed {@code Content-Length}
- * header values.
- * <p>
- * This class recognizes "chunked" and "identitiy" transfer-coding only.
+ * The lax implementation of the content length strategy. This class will ignore unrecognized transfer
+ * encodings and malformed {@code Content-Length} header values. <p> This class recognizes "chunked" and
+ * "identitiy" transfer-coding only.
  *
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class LaxContentLengthStrategy implements ContentLengthStrategy {
+public class LaxContentLengthStrategy
+  implements ContentLengthStrategy {
 
     public static final LaxContentLengthStrategy INSTANCE = new LaxContentLengthStrategy();
 
     private final int implicitLen;
 
     /**
-     * Creates {@code LaxContentLengthStrategy} instance with the given length used per default
-     * when content length is not explicitly specified in the message.
+     * Creates {@code LaxContentLengthStrategy} instance with the given length used per default when content
+     * length is not explicitly specified in the message.
      *
      * @param implicitLen implicit content length.
      *
@@ -69,8 +68,8 @@ public class LaxContentLengthStrategy implements ContentLengthStrategy {
     }
 
     /**
-     * Creates {@code LaxContentLengthStrategy} instance. {@link ContentLengthStrategy#IDENTITY}
-     * is used per default when content length is not explicitly specified in the message.
+     * Creates {@code LaxContentLengthStrategy} instance. {@link ContentLengthStrategy#IDENTITY} is used per
+     * default when content length is not explicitly specified in the message.
      */
     public LaxContentLengthStrategy() {
         this(IDENTITY);
@@ -88,16 +87,14 @@ public class LaxContentLengthStrategy implements ContentLengthStrategy {
             try {
                 encodings = transferEncodingHeader.getElements();
             } catch (final ParseException px) {
-                throw new ProtocolException
-                    ("Invalid Transfer-Encoding header value: " +
-                     transferEncodingHeader, px);
+                throw new ProtocolException(
+                  "Invalid Transfer-Encoding header value: " + transferEncodingHeader, px);
             }
             // The chunked encoding must be the last one applied RFC2616, 14.41
             final int len = encodings.length;
             if (HTTP.IDENTITY_CODING.equalsIgnoreCase(transferEncodingHeader.getValue())) {
                 return IDENTITY;
-            } else if ((len > 0) && (HTTP.CHUNK_CODING.equalsIgnoreCase(
-                    encodings[len - 1].getName()))) {
+            } else if ((len > 0) && (HTTP.CHUNK_CODING.equalsIgnoreCase(encodings[len - 1].getName()))) {
                 return CHUNKED;
             } else {
                 return IDENTITY;

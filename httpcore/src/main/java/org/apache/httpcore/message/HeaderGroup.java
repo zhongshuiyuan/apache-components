@@ -27,38 +27,37 @@
 
 package org.apache.httpcore.message;
 
+import org.apache.httpcore.Header;
+import org.apache.httpcore.HeaderIterator;
+import org.apache.httpcore.util.CharArrayBuffer;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.httpcore.Header;
-import org.apache.httpcore.HeaderIterator;
-import org.apache.httpcore.util.CharArrayBuffer;
-
 /**
- * A class for combining a set of headers.
- * This class allows for multiple headers with the same name and
- * keeps track of the order in which headers were added.
- *
+ * A class for combining a set of headers. This class allows for multiple headers with the same name and keeps
+ * track of the order in which headers were added.
  *
  * @since 4.0
  */
-public class HeaderGroup implements Cloneable, Serializable {
-
-    private static final long serialVersionUID = 2608834160639271617L;
+public class HeaderGroup
+  implements Cloneable, Serializable {
 
     private final Header[] EMPTY = new Header[] {};
 
-    /** The list of headers for this group, in the order in which they were added */
+    /**
+     * The list of headers for this group, in the order in which they were added
+     */
     private final List<Header> headers;
 
     /**
      * Constructor for HeaderGroup.
      */
     public HeaderGroup() {
-        this.headers = new ArrayList<Header>(16);
+        this.headers = new ArrayList<>(16);
     }
 
     /**
@@ -69,8 +68,7 @@ public class HeaderGroup implements Cloneable, Serializable {
     }
 
     /**
-     * Adds the given header to the group.  The order in which this header was
-     * added is preserved.
+     * Adds the given header to the group.  The order in which this header was added is preserved.
      *
      * @param header the header to add
      */
@@ -94,11 +92,11 @@ public class HeaderGroup implements Cloneable, Serializable {
     }
 
     /**
-     * Replaces the first occurence of the header with the same name. If no header with
-     * the same name is found the given header is added to the end of the list.
+     * Replaces the first occurence of the header with the same name. If no header with the same name is found
+     * the given header is added to the end of the list.
      *
-     * @param header the new header that should replace the first header with the same
-     * name if present in the list.
+     * @param header the new header that should replace the first header with the same name if present in
+     *   the list.
      */
     public void updateHeader(final Header header) {
         if (header == null) {
@@ -118,9 +116,8 @@ public class HeaderGroup implements Cloneable, Serializable {
     }
 
     /**
-     * Sets all of the headers contained within this group overriding any
-     * existing headers. The headers are added in the order in which they appear
-     * in the array.
+     * Sets all of the headers contained within this group overriding any existing headers. The headers are
+     * added in the order in which they appear in the array.
      *
      * @param headers the headers to set
      */
@@ -133,15 +130,14 @@ public class HeaderGroup implements Cloneable, Serializable {
     }
 
     /**
-     * Gets a header representing all of the header values with the given name.
-     * If more that one header with the given name exists the values will be
-     * combined with a "," as per RFC 2616.
+     * Gets a header representing all of the header values with the given name. If more that one header with
+     * the given name exists the values will be combined with a "," as per RFC 2616.
      *
      * <p>Header name comparison is case insensitive.
      *
      * @param name the name of the header(s) to get
-     * @return a header with a condensed value or {@code null} if no
-     * headers by the given name are present
+     *
+     * @return a header with a condensed value or {@code null} if no headers by the given name are present
      */
     public Header getCondensedHeader(final String name) {
         final Header[] hdrs = getHeaders(name);
@@ -163,8 +159,8 @@ public class HeaderGroup implements Cloneable, Serializable {
     }
 
     /**
-     * Gets all of the headers with the given name.  The returned array
-     * maintains the relative order in which the headers were added.
+     * Gets all of the headers with the given name.  The returned array maintains the relative order in which
+     * the headers were added.
      *
      * <p>Header name comparison is case insensitive.
      *
@@ -181,7 +177,7 @@ public class HeaderGroup implements Cloneable, Serializable {
             final Header header = this.headers.get(i);
             if (header.getName().equalsIgnoreCase(name)) {
                 if (headersFound == null) {
-                    headersFound = new ArrayList<Header>();
+                    headersFound = new ArrayList<>();
                 }
                 headersFound.add(header);
             }
@@ -195,6 +191,7 @@ public class HeaderGroup implements Cloneable, Serializable {
      * <p>Header name comparison is case insensitive.
      *
      * @param name the name of the header to get
+     *
      * @return the first header or {@code null}
      */
     public Header getFirstHeader(final String name) {
@@ -216,6 +213,7 @@ public class HeaderGroup implements Cloneable, Serializable {
      * <p>Header name comparison is case insensitive.
      *
      * @param name the name of the header to get
+     *
      * @return the last header or {@code null}
      */
     public Header getLastHeader(final String name) {
@@ -245,8 +243,8 @@ public class HeaderGroup implements Cloneable, Serializable {
      * <p>Header name comparison is case insensitive.
      *
      * @param name the header name to test for
-     * @return {@code true} if at least one header with the name is
-     * contained, {@code false} otherwise
+     *
+     * @return {@code true} if at least one header with the name is contained, {@code false} otherwise
      */
     public boolean containsHeader(final String name) {
         // HTTPCORE-361 : we don't use the for-each syntax, i.e.
@@ -276,8 +274,7 @@ public class HeaderGroup implements Cloneable, Serializable {
     /**
      * Returns an iterator over the headers with a given name in this group.
      *
-     * @param name      the name of the headers over which to iterate, or
-     *                  {@code null} for all headers
+     * @param name the name of the headers over which to iterate, or {@code null} for all headers
      *
      * @return iterator over some headers in this group.
      *

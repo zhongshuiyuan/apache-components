@@ -34,9 +34,8 @@ import java.io.IOException;
  *
  * @since 4.0
  */
-public class NoHttpResponseException extends IOException {
-
-    private static final long serialVersionUID = -7658940387386078766L;
+public class NoHttpResponseException
+  extends IOException {
 
     /**
      * Creates a new NoHttpResponseException with the specified detail message.
@@ -44,7 +43,7 @@ public class NoHttpResponseException extends IOException {
      * @param message exception message
      */
     public NoHttpResponseException(final String message) {
-        super(message);
+        super(HttpException.clean(message));
     }
 
 }

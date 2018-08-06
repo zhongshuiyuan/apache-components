@@ -44,16 +44,15 @@ import org.apache.httpcore.util.ByteArrayBuffer;
 import org.apache.httpcore.util.CharArrayBuffer;
 
 /**
- * Abstract base class for session output buffers that stream data to
- * an arbitrary {@link OutputStream}. This class buffers small chunks of
- * output data in an internal byte array for optimal output performance.
- * <p>
- * {@link #writeLine(CharArrayBuffer)} and {@link #writeLine(String)} methods
- * of this class use CR-LF as a line delimiter.
+ * Abstract base class for session output buffers that stream data to an arbitrary {@link OutputStream}. This
+ * class buffers small chunks of output data in an internal byte array for optimal output performance. <p>
+ * {@link #writeLine(CharArrayBuffer)} and {@link #writeLine(String)} methods of this class use CR-LF as a
+ * line delimiter.
  *
  * @since 4.3
  */
-public class SessionOutputBufferImpl implements SessionOutputBuffer, BufferInfo {
+public class SessionOutputBufferImpl
+  implements SessionOutputBuffer, BufferInfo {
 
     private static final byte[] CRLF = new byte[] {HTTP.CR, HTTP.LF};
 
@@ -70,17 +69,14 @@ public class SessionOutputBufferImpl implements SessionOutputBuffer, BufferInfo 
      *
      * @param metrics HTTP transport metrics.
      * @param buffersize buffer size. Must be a positive number.
-     * @param fragementSizeHint fragment size hint defining a minimal size of a fragment
-     *   that should be written out directly to the socket bypassing the session buffer.
-     *   Value {@code 0} disables fragment buffering.
-     * @param charencoder charencoder to be used for encoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for char to byte conversion.
+     * @param fragementSizeHint fragment size hint defining a minimal size of a fragment that should be
+     *   written out directly to the socket bypassing the session buffer. Value {@code 0} disables fragment
+     *   buffering.
+     * @param charencoder charencoder to be used for encoding HTTP protocol elements. If {@code null} simple
+     *   type cast will be used for char to byte conversion.
      */
-    public SessionOutputBufferImpl(
-            final HttpTransportMetricsImpl metrics,
-            final int buffersize,
-            final int fragementSizeHint,
-            final CharsetEncoder charencoder) {
+    public SessionOutputBufferImpl(final HttpTransportMetricsImpl metrics, final int buffersize,
+      final int fragementSizeHint, final CharsetEncoder charencoder) {
         super();
         Args.positive(buffersize, "Buffer size");
         Args.notNull(metrics, "HTTP transport metrcis");
@@ -90,9 +86,7 @@ public class SessionOutputBufferImpl implements SessionOutputBuffer, BufferInfo 
         this.encoder = charencoder;
     }
 
-    public SessionOutputBufferImpl(
-            final HttpTransportMetricsImpl metrics,
-            final int buffersize) {
+    public SessionOutputBufferImpl(final HttpTransportMetricsImpl metrics, final int buffersize) {
         this(metrics, buffersize, buffersize, null);
     }
 
@@ -193,13 +187,12 @@ public class SessionOutputBufferImpl implements SessionOutputBuffer, BufferInfo 
     }
 
     /**
-     * Writes characters from the specified string followed by a line delimiter
-     * to this session buffer.
-     * <p>
+     * Writes characters from the specified string followed by a line delimiter to this session buffer. <p>
      * This method uses CR-LF as a line delimiter.
      *
-     * @param      s   the line.
-     * @throws  IOException  if an I/O error occurs.
+     * @param s the line.
+     *
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void writeLine(final String s) throws IOException {
@@ -220,13 +213,12 @@ public class SessionOutputBufferImpl implements SessionOutputBuffer, BufferInfo 
     }
 
     /**
-     * Writes characters from the specified char array followed by a line
-     * delimiter to this session buffer.
-     * <p>
-     * This method uses CR-LF as a line delimiter.
+     * Writes characters from the specified char array followed by a line delimiter to this session buffer.
+     * <p> This method uses CR-LF as a line delimiter.
      *
-     * @param      charbuffer the buffer containing chars of the line.
-     * @throws  IOException  if an I/O error occurs.
+     * @param charbuffer the buffer containing chars of the line.
+     *
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     public void writeLine(final CharArrayBuffer charbuffer) throws IOException {

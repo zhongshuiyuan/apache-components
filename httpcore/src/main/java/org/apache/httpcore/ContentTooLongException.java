@@ -34,9 +34,8 @@ import java.io.IOException;
  *
  * @since 4.2
  */
-public class ContentTooLongException extends IOException {
-
-    private static final long serialVersionUID = -924287689552495383L;
+public class ContentTooLongException
+  extends IOException {
 
     /**
      * Creates a new ContentTooLongException with the specified detail message.

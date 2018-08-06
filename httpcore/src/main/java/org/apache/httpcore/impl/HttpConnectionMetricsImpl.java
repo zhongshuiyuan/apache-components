@@ -27,18 +27,19 @@
 
 package org.apache.httpcore.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.httpcore.HttpConnectionMetrics;
 import org.apache.httpcore.io.HttpTransportMetrics;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Default implementation of the {@link HttpConnectionMetrics} interface.
  *
  * @since 4.0
  */
-public class HttpConnectionMetricsImpl implements HttpConnectionMetrics {
+public class HttpConnectionMetricsImpl
+  implements HttpConnectionMetrics {
 
     public static final String REQUEST_COUNT = "http.request-count";
     public static final String RESPONSE_COUNT = "http.response-count";
@@ -55,9 +56,8 @@ public class HttpConnectionMetricsImpl implements HttpConnectionMetrics {
      */
     private Map<String, Object> metricsCache;
 
-    public HttpConnectionMetricsImpl(
-            final HttpTransportMetrics inTransportMetric,
-            final HttpTransportMetrics outTransportMetric) {
+    public HttpConnectionMetricsImpl(final HttpTransportMetrics inTransportMetric,
+      final HttpTransportMetrics outTransportMetric) {
         super();
         this.inTransportMetric = inTransportMetric;
         this.outTransportMetric = outTransportMetric;
@@ -131,7 +131,7 @@ public class HttpConnectionMetricsImpl implements HttpConnectionMetrics {
 
     public void setMetric(final String metricName, final Object obj) {
         if (this.metricsCache == null) {
-            this.metricsCache = new HashMap<String, Object>();
+            this.metricsCache = new HashMap<>();
         }
         this.metricsCache.put(metricName, obj);
     }

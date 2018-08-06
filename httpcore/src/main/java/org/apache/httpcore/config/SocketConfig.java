@@ -27,8 +27,8 @@
 
 package org.apache.httpcore.config;
 
-import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.util.Args;
 
 /**
@@ -37,7 +37,8 @@ import org.apache.httpcore.util.Args;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class SocketConfig implements Cloneable {
+public class SocketConfig
+  implements Cloneable {
 
     public static final SocketConfig DEFAULT = new Builder().build();
 
@@ -50,15 +51,9 @@ public class SocketConfig implements Cloneable {
     private final int rcvBufSize;
     private final int backlogSize;
 
-    SocketConfig(
-            final int soTimeout,
-            final boolean soReuseAddress,
-            final int soLinger,
-            final boolean soKeepAlive,
-            final boolean tcpNoDelay,
-            final int sndBufSize,
-            final int rcvBufSize,
-            final int backlogSize) {
+    SocketConfig(final int soTimeout, final boolean soReuseAddress, final int soLinger,
+      final boolean soKeepAlive, final boolean tcpNoDelay, final int sndBufSize, final int rcvBufSize,
+      final int backlogSize) {
         super();
         this.soTimeout = soTimeout;
         this.soReuseAddress = soReuseAddress;
@@ -71,12 +66,11 @@ public class SocketConfig implements Cloneable {
     }
 
     /**
-     * Determines the default socket timeout value for non-blocking I/O operations.
-     * <p>
-     * Default: {@code 0} (no timeout)
-     * </p>
+     * Determines the default socket timeout value for non-blocking I/O operations. <p> Default: {@code 0} (no
+     * timeout) </p>
      *
      * @return the default socket timeout value for non-blocking I/O operations.
+     *
      * @see java.net.SocketOptions#SO_TIMEOUT
      */
     public int getSoTimeout() {
@@ -84,13 +78,11 @@ public class SocketConfig implements Cloneable {
     }
 
     /**
-     * Determines the default value of the {@link java.net.SocketOptions#SO_REUSEADDR} parameter
-     * for newly created sockets.
-     * <p>
-     * Default: {@code false}
-     * </p>
+     * Determines the default value of the {@link java.net.SocketOptions#SO_REUSEADDR} parameter for newly
+     * created sockets. <p> Default: {@code false} </p>
      *
      * @return the default value of the {@link java.net.SocketOptions#SO_REUSEADDR} parameter.
+     *
      * @see java.net.SocketOptions#SO_REUSEADDR
      */
     public boolean isSoReuseAddress() {
@@ -98,13 +90,11 @@ public class SocketConfig implements Cloneable {
     }
 
     /**
-     * Determines the default value of the {@link java.net.SocketOptions#SO_LINGER} parameter
-     * for newly created sockets.
-     * <p>
-     * Default: {@code -1}
-     * </p>
+     * Determines the default value of the {@link java.net.SocketOptions#SO_LINGER} parameter for newly
+     * created sockets. <p> Default: {@code -1} </p>
      *
      * @return the default value of the {@link java.net.SocketOptions#SO_LINGER} parameter.
+     *
      * @see java.net.SocketOptions#SO_LINGER
      */
     public int getSoLinger() {
@@ -112,13 +102,11 @@ public class SocketConfig implements Cloneable {
     }
 
     /**
-     * Determines the default value of the {@link java.net.SocketOptions#SO_KEEPALIVE} parameter
-     * for newly created sockets.
-     * <p>
-     * Default: {@code false}
-     * </p>
+     * Determines the default value of the {@link java.net.SocketOptions#SO_KEEPALIVE} parameter for newly
+     * created sockets. <p> Default: {@code false} </p>
      *
      * @return the default value of the {@link java.net.SocketOptions#SO_KEEPALIVE} parameter.
+     *
      * @see java.net.SocketOptions#SO_KEEPALIVE
      */
     public boolean isSoKeepAlive() {
@@ -126,13 +114,11 @@ public class SocketConfig implements Cloneable {
     }
 
     /**
-     * Determines the default value of the {@link java.net.SocketOptions#TCP_NODELAY} parameter
-     * for newly created sockets.
-     * <p>
-     * Default: {@code false}
-     * </p>
+     * Determines the default value of the {@link java.net.SocketOptions#TCP_NODELAY} parameter for newly
+     * created sockets. <p> Default: {@code false} </p>
      *
      * @return the default value of the {@link java.net.SocketOptions#TCP_NODELAY} parameter.
+     *
      * @see java.net.SocketOptions#TCP_NODELAY
      */
     public boolean isTcpNoDelay() {
@@ -140,13 +126,11 @@ public class SocketConfig implements Cloneable {
     }
 
     /**
-     * Determines the default value of the {@link java.net.SocketOptions#SO_SNDBUF} parameter
-     * for newly created sockets.
-     * <p>
-     * Default: {@code 0} (system default)
-     * </p>
+     * Determines the default value of the {@link java.net.SocketOptions#SO_SNDBUF} parameter for newly
+     * created sockets. <p> Default: {@code 0} (system default) </p>
      *
      * @return the default value of the {@link java.net.SocketOptions#SO_SNDBUF} parameter.
+     *
      * @see java.net.SocketOptions#SO_SNDBUF
      * @since 4.4
      */
@@ -155,13 +139,11 @@ public class SocketConfig implements Cloneable {
     }
 
     /**
-     * Determines the default value of the {@link java.net.SocketOptions#SO_RCVBUF} parameter
-     * for newly created sockets.
-     * <p>
-     * Default: {@code 0} (system default)
-     * </p>
+     * Determines the default value of the {@link java.net.SocketOptions#SO_RCVBUF} parameter for newly
+     * created sockets. <p> Default: {@code 0} (system default) </p>
      *
      * @return the default value of the {@link java.net.SocketOptions#SO_RCVBUF} parameter.
+     *
      * @see java.net.SocketOptions#SO_RCVBUF
      * @since 4.4
      */
@@ -170,12 +152,11 @@ public class SocketConfig implements Cloneable {
     }
 
     /**
-     * Determines the maximum queue length for incoming connection indications
-     * (a request to connect) also known as server socket backlog.
-     * <p>
-     * Default: {@code 0} (system default)
-     * </p>
+     * Determines the maximum queue length for incoming connection indications (a request to connect) also
+     * known as server socket backlog. <p> Default: {@code 0} (system default) </p>
+     *
      * @return the maximum queue length for incoming connection indications
+     *
      * @since 4.4
      */
     public int getBacklogSize() {
@@ -184,39 +165,46 @@ public class SocketConfig implements Cloneable {
 
     @Override
     protected SocketConfig clone() throws CloneNotSupportedException {
-        return (SocketConfig) super.clone();
+        return (SocketConfig)super.clone();
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("[soTimeout=").append(this.soTimeout)
-                .append(", soReuseAddress=").append(this.soReuseAddress)
-                .append(", soLinger=").append(this.soLinger)
-                .append(", soKeepAlive=").append(this.soKeepAlive)
-                .append(", tcpNoDelay=").append(this.tcpNoDelay)
-                .append(", sndBufSize=").append(this.sndBufSize)
-                .append(", rcvBufSize=").append(this.rcvBufSize)
-                .append(", backlogSize=").append(this.backlogSize)
-                .append("]");
+        builder.append("[soTimeout=")
+          .append(this.soTimeout)
+          .append(", soReuseAddress=")
+          .append(this.soReuseAddress)
+          .append(", soLinger=")
+          .append(this.soLinger)
+          .append(", soKeepAlive=")
+          .append(this.soKeepAlive)
+          .append(", tcpNoDelay=")
+          .append(this.tcpNoDelay)
+          .append(", sndBufSize=")
+          .append(this.sndBufSize)
+          .append(", rcvBufSize=")
+          .append(this.rcvBufSize)
+          .append(", backlogSize=")
+          .append(this.backlogSize)
+          .append("]");
         return builder.toString();
     }
 
-    public static SocketConfig.Builder custom() {
+    public static Builder custom() {
         return new Builder();
     }
 
-    public static SocketConfig.Builder copy(final SocketConfig config) {
+    public static Builder copy(final SocketConfig config) {
         Args.notNull(config, "Socket config");
-        return new Builder()
-            .setSoTimeout(config.getSoTimeout())
-            .setSoReuseAddress(config.isSoReuseAddress())
-            .setSoLinger(config.getSoLinger())
-            .setSoKeepAlive(config.isSoKeepAlive())
-            .setTcpNoDelay(config.isTcpNoDelay())
-            .setSndBufSize(config.getSndBufSize())
-            .setRcvBufSize(config.getRcvBufSize())
-            .setBacklogSize(config.getBacklogSize());
+        return new Builder().setSoTimeout(config.getSoTimeout())
+          .setSoReuseAddress(config.isSoReuseAddress())
+          .setSoLinger(config.getSoLinger())
+          .setSoKeepAlive(config.isSoKeepAlive())
+          .setTcpNoDelay(config.isTcpNoDelay())
+          .setSndBufSize(config.getSndBufSize())
+          .setRcvBufSize(config.getRcvBufSize())
+          .setBacklogSize(config.getBacklogSize());
     }
 
     public static class Builder {
@@ -285,8 +273,8 @@ public class SocketConfig implements Cloneable {
         }
 
         public SocketConfig build() {
-            return new SocketConfig(soTimeout, soReuseAddress, soLinger, soKeepAlive, tcpNoDelay,
-                    sndBufSize, rcvBufSize, backlogSize);
+            return new SocketConfig(soTimeout, soReuseAddress, soLinger, soKeepAlive, tcpNoDelay, sndBufSize,
+              rcvBufSize, backlogSize);
         }
 
     }

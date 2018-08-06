@@ -27,29 +27,28 @@
 
 package org.apache.httpcore.entity;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import org.apache.httpcore.impl.io.EmptyInputStream;
 import org.apache.httpcore.util.Args;
 import org.apache.httpcore.util.Asserts;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
- * A generic streamed, non-repeatable entity that obtains its content
- * from an {@link InputStream}.
+ * A generic streamed, non-repeatable entity that obtains its content from an {@link InputStream}.
  *
  * @since 4.0
  */
-public class BasicHttpEntity extends AbstractHttpEntity {
+public class BasicHttpEntity
+  extends AbstractHttpEntity {
 
     private InputStream content;
     private long length;
 
     /**
-     * Creates a new basic entity.
-     * The content is initially missing, the content length
-     * is set to a negative number.
+     * Creates a new basic entity. The content is initially missing, the content length is set to a negative
+     * number.
      */
     public BasicHttpEntity() {
         super();
@@ -64,11 +63,10 @@ public class BasicHttpEntity extends AbstractHttpEntity {
     /**
      * Obtains the content, once only.
      *
-     * @return  the content, if this is the first call to this method
-     *          since {@link #setContent setContent} has been called
+     * @return the content, if this is the first call to this method since {@link #setContent setContent} has
+     *   been called
      *
-     * @throws IllegalStateException
-     *          if the content has not been provided
+     * @throws IllegalStateException if the content has not been provided
      */
     @Override
     public InputStream getContent() throws IllegalStateException {
@@ -89,8 +87,7 @@ public class BasicHttpEntity extends AbstractHttpEntity {
     /**
      * Specifies the length of the content.
      *
-     * @param len       the number of bytes in the content, or
-     *                  a negative number to indicate an unknown length
+     * @param len the number of bytes in the content, or a negative number to indicate an unknown length
      */
     public void setContentLength(final long len) {
         this.length = len;
@@ -99,8 +96,7 @@ public class BasicHttpEntity extends AbstractHttpEntity {
     /**
      * Specifies the content.
      *
-     * @param instream          the stream to return with the next call to
-     *                          {@link #getContent getContent}
+     * @param instream the stream to return with the next call to {@link #getContent getContent}
      */
     public void setContent(final InputStream instream) {
         this.content = instream;

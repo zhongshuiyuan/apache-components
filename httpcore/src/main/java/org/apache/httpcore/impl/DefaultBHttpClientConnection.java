@@ -50,16 +50,15 @@ import org.apache.httpcore.io.HttpMessageParserFactory;
 import org.apache.httpcore.io.HttpMessageWriter;
 import org.apache.httpcore.io.HttpMessageWriterFactory;
 import org.apache.httpcore.util.Args;
-import org.apache.httpcore.impl.entity.LaxContentLengthStrategy;
-import org.apache.httpcore.impl.entity.StrictContentLengthStrategy;
 
 /**
  * Default implementation of {@link HttpClientConnection}.
  *
  * @since 4.3
  */
-public class DefaultBHttpClientConnection extends BHttpConnectionBase
-                                                   implements HttpClientConnection {
+public class DefaultBHttpClientConnection
+  extends BHttpConnectionBase
+  implements HttpClientConnection {
 
     private final HttpMessageParser<HttpResponse> responseParser;
     private final HttpMessageWriter<HttpRequest> requestWriter;
@@ -69,44 +68,40 @@ public class DefaultBHttpClientConnection extends BHttpConnectionBase
      *
      * @param buffersize buffer size. Must be a positive number.
      * @param fragmentSizeHint fragment size hint.
-     * @param chardecoder decoder to be used for decoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for byte to char conversion.
-     * @param charencoder encoder to be used for encoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for char to byte conversion.
-     * @param constraints Message constraints. If {@code null}
-     *   {@link MessageConstraints#DEFAULT} will be used.
-     * @param incomingContentStrategy incoming content length strategy. If {@code null}
-     *   {@link LaxContentLengthStrategy#INSTANCE} will be used.
-     * @param outgoingContentStrategy outgoing content length strategy. If {@code null}
-     *   {@link StrictContentLengthStrategy#INSTANCE} will be used.
-     * @param requestWriterFactory request writer factory. If {@code null}
-     *   {@link DefaultHttpRequestWriterFactory#INSTANCE} will be used.
-     * @param responseParserFactory response parser factory. If {@code null}
-     *   {@link DefaultHttpResponseParserFactory#INSTANCE} will be used.
+     * @param chardecoder decoder to be used for decoding HTTP protocol elements. If {@code null} simple
+     *   type cast will be used for byte to char conversion.
+     * @param charencoder encoder to be used for encoding HTTP protocol elements. If {@code null} simple
+     *   type cast will be used for char to byte conversion.
+     * @param constraints Message constraints. If {@code null} {@link MessageConstraints#DEFAULT} will be
+     *   used.
+     * @param incomingContentStrategy incoming content length strategy. If {@code null} {@link
+     *   org.apache.httpcore.impl.entity.LaxContentLengthStrategy#INSTANCE} will be used.
+     * @param outgoingContentStrategy outgoing content length strategy. If {@code null} {@link
+     *   org.apache.httpcore.impl.entity.StrictContentLengthStrategy#INSTANCE} will be used.
+     * @param requestWriterFactory request writer factory. If {@code null} {@link
+     *   DefaultHttpRequestWriterFactory#INSTANCE} will be used.
+     * @param responseParserFactory response parser factory. If {@code null} {@link
+     *   DefaultHttpResponseParserFactory#INSTANCE} will be used.
      */
-    public DefaultBHttpClientConnection(
-            final int buffersize,
-            final int fragmentSizeHint,
-            final CharsetDecoder chardecoder,
-            final CharsetEncoder charencoder,
-            final MessageConstraints constraints,
-            final ContentLengthStrategy incomingContentStrategy,
-            final ContentLengthStrategy outgoingContentStrategy,
-            final HttpMessageWriterFactory<HttpRequest> requestWriterFactory,
-            final HttpMessageParserFactory<HttpResponse> responseParserFactory) {
-        super(buffersize, fragmentSizeHint, chardecoder, charencoder,
-                constraints, incomingContentStrategy, outgoingContentStrategy);
-        this.requestWriter = (requestWriterFactory != null ? requestWriterFactory :
-            DefaultHttpRequestWriterFactory.INSTANCE).create(getSessionOutputBuffer());
-        this.responseParser = (responseParserFactory != null ? responseParserFactory :
-            DefaultHttpResponseParserFactory.INSTANCE).create(getSessionInputBuffer(), constraints);
+    public DefaultBHttpClientConnection(final int buffersize, final int fragmentSizeHint,
+      final CharsetDecoder chardecoder, final CharsetEncoder charencoder,
+      final MessageConstraints constraints, final ContentLengthStrategy incomingContentStrategy,
+      final ContentLengthStrategy outgoingContentStrategy,
+      final HttpMessageWriterFactory<HttpRequest> requestWriterFactory,
+      final HttpMessageParserFactory<HttpResponse> responseParserFactory) {
+        super(buffersize, fragmentSizeHint, chardecoder, charencoder, constraints, incomingContentStrategy,
+          outgoingContentStrategy);
+        this.requestWriter = (requestWriterFactory !=
+                              null ? requestWriterFactory : DefaultHttpRequestWriterFactory.INSTANCE).create(
+          getSessionOutputBuffer());
+        this.responseParser = (responseParserFactory !=
+                               null ? responseParserFactory : DefaultHttpResponseParserFactory.INSTANCE)
+          .create(
+          getSessionInputBuffer(), constraints);
     }
 
-    public DefaultBHttpClientConnection(
-            final int buffersize,
-            final CharsetDecoder chardecoder,
-            final CharsetEncoder charencoder,
-            final MessageConstraints constraints) {
+    public DefaultBHttpClientConnection(final int buffersize, final CharsetDecoder chardecoder,
+      final CharsetEncoder charencoder, final MessageConstraints constraints) {
         this(buffersize, buffersize, chardecoder, charencoder, constraints, null, null, null, null);
     }
 
@@ -136,8 +131,7 @@ public class DefaultBHttpClientConnection extends BHttpConnectionBase
     }
 
     @Override
-    public void sendRequestHeader(final HttpRequest request)
-            throws HttpException, IOException {
+    public void sendRequestHeader(final HttpRequest request) throws HttpException, IOException {
         Args.notNull(request, "HTTP request");
         ensureOpen();
         this.requestWriter.write(request);
@@ -147,7 +141,7 @@ public class DefaultBHttpClientConnection extends BHttpConnectionBase
 
     @Override
     public void sendRequestEntity(final HttpEntityEnclosingRequest request)
-            throws HttpException, IOException {
+      throws HttpException, IOException {
         Args.notNull(request, "HTTP request");
         ensureOpen();
         final HttpEntity entity = request.getEntity();
@@ -171,8 +165,7 @@ public class DefaultBHttpClientConnection extends BHttpConnectionBase
     }
 
     @Override
-    public void receiveResponseEntity(
-            final HttpResponse response) throws HttpException, IOException {
+    public void receiveResponseEntity(final HttpResponse response) throws HttpException, IOException {
         Args.notNull(response, "HTTP response");
         ensureOpen();
         final HttpEntity entity = prepareInput(response);

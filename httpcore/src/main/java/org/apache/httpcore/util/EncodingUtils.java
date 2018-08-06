@@ -33,27 +33,23 @@ import org.apache.httpcore.Consts;
 /**
  * The home for utility methods that handle various encoding tasks.
  *
- *
  * @since 4.0
  */
 public final class EncodingUtils {
 
     /**
-     * Converts the byte array of HTTP content characters to a string. If
-     * the specified charset is not supported, default system encoding
-     * is used.
+     * Converts the byte array of HTTP content characters to a string. If the specified charset is not
+     * supported, default system encoding is used.
      *
      * @param data the byte array to be encoded
      * @param offset the index of the first byte to encode
      * @param length the number of bytes to encode
      * @param charset the desired character encoding
+     *
      * @return The result of the conversion.
      */
-    public static String getString(
-        final byte[] data,
-        final int offset,
-        final int length,
-        final String charset) {
+    public static String getString(final byte[] data, final int offset, final int length,
+      final String charset) {
         Args.notNull(data, "Input");
         Args.notEmpty(charset, "Charset");
         try {
@@ -65,12 +61,12 @@ public final class EncodingUtils {
 
 
     /**
-     * Converts the byte array of HTTP content characters to a string. If
-     * the specified charset is not supported, default system encoding
-     * is used.
+     * Converts the byte array of HTTP content characters to a string. If the specified charset is not
+     * supported, default system encoding is used.
      *
      * @param data the byte array to be encoded
      * @param charset the desired character encoding
+     *
      * @return The result of the conversion.
      */
     public static String getString(final byte[] data, final String charset) {
@@ -79,11 +75,12 @@ public final class EncodingUtils {
     }
 
     /**
-     * Converts the specified string to a byte array.  If the charset is not supported the
-     * default system charset is used.
+     * Converts the specified string to a byte array.  If the charset is not supported the default system
+     * charset is used.
      *
      * @param data the string to be encoded
      * @param charset the desired character encoding
+     *
      * @return The resulting byte array.
      */
     public static byte[] getBytes(final String data, final String charset) {
@@ -100,6 +97,7 @@ public final class EncodingUtils {
      * Converts the specified string to byte array of ASCII characters.
      *
      * @param data the string to be encoded
+     *
      * @return The string as a byte array.
      */
     public static byte[] getAsciiBytes(final String data) {
@@ -108,13 +106,13 @@ public final class EncodingUtils {
     }
 
     /**
-     * Converts the byte array of ASCII characters to a string. This method is
-     * to be used when decoding content of HTTP elements (such as response
-     * headers)
+     * Converts the byte array of ASCII characters to a string. This method is to be used when decoding
+     * content of HTTP elements (such as response headers)
      *
      * @param data the byte array to be encoded
      * @param offset the index of the first byte to encode
      * @param length the number of bytes to encode
+     *
      * @return The string representation of the byte array
      */
     public static String getAsciiString(final byte[] data, final int offset, final int length) {
@@ -123,11 +121,11 @@ public final class EncodingUtils {
     }
 
     /**
-     * Converts the byte array of ASCII characters to a string. This method is
-     * to be used when decoding content of HTTP elements (such as response
-     * headers)
+     * Converts the byte array of ASCII characters to a string. This method is to be used when decoding
+     * content of HTTP elements (such as response headers)
      *
      * @param data the byte array to be encoded
+     *
      * @return The string representation of the byte array
      */
     public static String getAsciiString(final byte[] data) {

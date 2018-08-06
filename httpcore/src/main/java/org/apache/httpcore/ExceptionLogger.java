@@ -31,15 +31,16 @@ package org.apache.httpcore;
  */
 public interface ExceptionLogger {
 
-    public static final ExceptionLogger NO_OP = new ExceptionLogger() {
+    ExceptionLogger NO_OP = new ExceptionLogger() {
 
         @Override
         public void log(final Exception ex) {
+            // do nothing
         }
 
     };
 
-    public static final ExceptionLogger STD_ERR = new ExceptionLogger() {
+    ExceptionLogger STD_ERR = new ExceptionLogger() {
 
         @Override
         public void log(final Exception ex) {

@@ -34,7 +34,8 @@ import java.net.InetAddress;
  *
  * @since 4.0
  */
-public interface HttpInetConnection extends HttpConnection {
+public interface HttpInetConnection
+  extends HttpConnection {
 
     InetAddress getLocalAddress();
 

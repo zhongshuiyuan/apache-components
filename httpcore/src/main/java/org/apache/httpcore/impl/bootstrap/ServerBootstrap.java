@@ -26,14 +26,6 @@
  */
 package org.apache.httpcore.impl.bootstrap;
 
-import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
-import javax.net.ServerSocketFactory;
-import javax.net.ssl.SSLContext;
-
 import org.apache.httpcore.ConnectionReuseStrategy;
 import org.apache.httpcore.ExceptionLogger;
 import org.apache.httpcore.HttpConnectionFactory;
@@ -57,6 +49,14 @@ import org.apache.httpcore.protocol.ResponseContent;
 import org.apache.httpcore.protocol.ResponseDate;
 import org.apache.httpcore.protocol.ResponseServer;
 import org.apache.httpcore.protocol.UriHttpRequestHandlerMapper;
+
+import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+import javax.net.ServerSocketFactory;
+import javax.net.ssl.SSLContext;
 
 /**
  * @since 4.4
@@ -93,6 +93,8 @@ public class ServerBootstrap {
 
     /**
      * Sets listener port number.
+     *
+     * @return this
      */
     public final ServerBootstrap setListenerPort(final int listenerPort) {
         this.listenerPort = listenerPort;
@@ -101,6 +103,8 @@ public class ServerBootstrap {
 
     /**
      * Assigns local interface for the listener.
+     *
+     * @return this
      */
     public final ServerBootstrap setLocalAddress(final InetAddress localAddress) {
         this.localAddress = localAddress;
@@ -109,6 +113,8 @@ public class ServerBootstrap {
 
     /**
      * Sets socket configuration.
+     *
+     * @return this
      */
     public final ServerBootstrap setSocketConfig(final SocketConfig socketConfig) {
         this.socketConfig = socketConfig;
@@ -116,10 +122,10 @@ public class ServerBootstrap {
     }
 
     /**
-     * Sets connection configuration.
-     * <p>
-     * Please note this value can be overridden by the {@link #setConnectionFactory(
-     *HttpConnectionFactory)} method.
+     * Sets connection configuration. <p> Please note this value can be overridden by the {@link
+     * #setConnectionFactory(org.apache.httpcore.HttpConnectionFactory)} method. </p>
+     *
+     * @return this
      */
     public final ServerBootstrap setConnectionConfig(final ConnectionConfig connectionConfig) {
         this.connectionConfig = connectionConfig;
@@ -128,6 +134,8 @@ public class ServerBootstrap {
 
     /**
      * Assigns {@link HttpProcessor} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setHttpProcessor(final HttpProcessor httpProcessor) {
         this.httpProcessor = httpProcessor;
@@ -135,10 +143,11 @@ public class ServerBootstrap {
     }
 
     /**
-     * Adds this protocol interceptor to the head of the protocol processing list.
-     * <p>
-     * Please note this value can be overridden by the {@link #setHttpProcessor(
-     *HttpProcessor)} method.
+     * Adds this protocol interceptor to the head of the protocol processing list. <p> Please note this value
+     * can be overridden by the {@link #setHttpProcessor(org.apache.httpcore.protocol.HttpProcessor)} method.
+     * </p>
+     *
+     * @return this
      */
     public final ServerBootstrap addInterceptorFirst(final HttpResponseInterceptor itcp) {
         if (itcp == null) {
@@ -152,10 +161,11 @@ public class ServerBootstrap {
     }
 
     /**
-     * Adds this protocol interceptor to the tail of the protocol processing list.
-     * <p>
-     * Please note this value can be overridden by the {@link #setHttpProcessor(
-     *HttpProcessor)} method.
+     * Adds this protocol interceptor to the tail of the protocol processing list. <p> Please note this value
+     * can be overridden by the {@link #setHttpProcessor(org.apache.httpcore.protocol.HttpProcessor)} method.
+     * </p>
+     *
+     * @return this
      */
     public final ServerBootstrap addInterceptorLast(final HttpResponseInterceptor itcp) {
         if (itcp == null) {
@@ -169,10 +179,11 @@ public class ServerBootstrap {
     }
 
     /**
-     * Adds this protocol interceptor to the head of the protocol processing list.
-     * <p>
-     * Please note this value can be overridden by the {@link #setHttpProcessor(
-     *HttpProcessor)} method.
+     * Adds this protocol interceptor to the head of the protocol processing list. <p> Please note this value
+     * can be overridden by the {@link #setHttpProcessor(org.apache.httpcore.protocol.HttpProcessor)} method.
+     * </p>
+     *
+     * @return this
      */
     public final ServerBootstrap addInterceptorFirst(final HttpRequestInterceptor itcp) {
         if (itcp == null) {
@@ -186,10 +197,11 @@ public class ServerBootstrap {
     }
 
     /**
-     * Adds this protocol interceptor to the tail of the protocol processing list.
-     * <p>
-     * Please note this value can be overridden by the {@link #setHttpProcessor(
-     *HttpProcessor)} method.
+     * Adds this protocol interceptor to the tail of the protocol processing list. <p> Please note this value
+     * can be overridden by the {@link #setHttpProcessor(org.apache.httpcore.protocol.HttpProcessor)} method.
+     * </p>
+     *
+     * @return this
      */
     public final ServerBootstrap addInterceptorLast(final HttpRequestInterceptor itcp) {
         if (itcp == null) {
@@ -203,10 +215,10 @@ public class ServerBootstrap {
     }
 
     /**
-     * Assigns {@code Server} response header value.
-     * <p>
-     * Please note this value can be overridden by the {@link #setHttpProcessor(
-     *HttpProcessor)} method.
+     * Assigns {@code Server} response header value. <p> Please note this value can be overridden by the
+     * {@link #setHttpProcessor(org.apache.httpcore.protocol.HttpProcessor)} method. </p>
+     *
+     * @return this
      */
     public final ServerBootstrap setServerInfo(final String serverInfo) {
         this.serverInfo = serverInfo;
@@ -215,6 +227,8 @@ public class ServerBootstrap {
 
     /**
      * Assigns {@link ConnectionReuseStrategy} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setConnectionReuseStrategy(final ConnectionReuseStrategy connStrategy) {
         this.connStrategy = connStrategy;
@@ -223,6 +237,8 @@ public class ServerBootstrap {
 
     /**
      * Assigns {@link HttpResponseFactory} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setResponseFactory(final HttpResponseFactory responseFactory) {
         this.responseFactory = responseFactory;
@@ -231,6 +247,8 @@ public class ServerBootstrap {
 
     /**
      * Assigns {@link HttpRequestHandlerMapper} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setHandlerMapper(final HttpRequestHandlerMapper handlerMapper) {
         this.handlerMapper = handlerMapper;
@@ -238,14 +256,14 @@ public class ServerBootstrap {
     }
 
     /**
-     * Registers the given {@link HttpRequestHandler} as a handler for URIs
-     * matching the given pattern.
-     * <p>
+     * Registers the given {@link HttpRequestHandler} as a handler for URIs matching the given pattern. <p>
      * Please note this value can be overridden by the {@link #setHandlerMapper(
-     *HttpRequestHandlerMapper)} method.
+     *org.apache.httpcore.protocol.HttpRequestHandlerMapper)} method. </p>
      *
      * @param pattern the pattern to register the handler for.
      * @param handler the handler.
+     *
+     * @return this
      */
     public final ServerBootstrap registerHandler(final String pattern, final HttpRequestHandler handler) {
         if (pattern == null || handler == null) {
@@ -260,6 +278,8 @@ public class ServerBootstrap {
 
     /**
      * Assigns {@link HttpExpectationVerifier} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setExpectationVerifier(final HttpExpectationVerifier expectationVerifier) {
         this.expectationVerifier = expectationVerifier;
@@ -268,15 +288,19 @@ public class ServerBootstrap {
 
     /**
      * Assigns {@link HttpConnectionFactory} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setConnectionFactory(
-            final HttpConnectionFactory<? extends DefaultBHttpServerConnection> connectionFactory) {
+      final HttpConnectionFactory<? extends DefaultBHttpServerConnection> connectionFactory) {
         this.connectionFactory = connectionFactory;
         return this;
     }
 
     /**
-     * Assigns {@link SSLServerSetupHandler} instance.
+     * Assigns {@link org.apache.httpcore.impl.bootstrap.SSLServerSetupHandler} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setSslSetupHandler(final SSLServerSetupHandler sslSetupHandler) {
         this.sslSetupHandler = sslSetupHandler;
@@ -284,7 +308,9 @@ public class ServerBootstrap {
     }
 
     /**
-     * Assigns {@link javax.net.ServerSocketFactory} instance.
+     * Assigns {@link ServerSocketFactory} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setServerSocketFactory(final ServerSocketFactory serverSocketFactory) {
         this.serverSocketFactory = serverSocketFactory;
@@ -292,10 +318,10 @@ public class ServerBootstrap {
     }
 
     /**
-     * Assigns {@link javax.net.ssl.SSLContext} instance.
-     * <p>
-     * Please note this value can be overridden by the {@link #setServerSocketFactory(
-     *   javax.net.ServerSocketFactory)} method.
+     * Assigns {@link SSLContext} instance. <p> Please note this value can be overridden by the {@link
+     * #setServerSocketFactory(ServerSocketFactory)} method. </p>
+     *
+     * @return this
      */
     public final ServerBootstrap setSslContext(final SSLContext sslContext) {
         this.sslContext = sslContext;
@@ -303,7 +329,9 @@ public class ServerBootstrap {
     }
 
     /**
-     * Assigns {@link ExceptionLogger} instance.
+     * Assigns {@link org.apache.httpcore.ExceptionLogger} instance.
+     *
+     * @return this
      */
     public final ServerBootstrap setExceptionLogger(final ExceptionLogger exceptionLogger) {
         this.exceptionLogger = exceptionLogger;
@@ -317,12 +345,12 @@ public class ServerBootstrap {
 
             final HttpProcessorBuilder b = HttpProcessorBuilder.create();
             if (requestFirst != null) {
-                for (final HttpRequestInterceptor i: requestFirst) {
+                for (final HttpRequestInterceptor i : requestFirst) {
                     b.addFirst(i);
                 }
             }
             if (responseFirst != null) {
-                for (final HttpResponseInterceptor i: responseFirst) {
+                for (final HttpResponseInterceptor i : responseFirst) {
                     b.addFirst(i);
                 }
             }
@@ -332,18 +360,15 @@ public class ServerBootstrap {
                 serverInfoCopy = "Apache-HttpCore/1.1";
             }
 
-            b.addAll(
-                    new ResponseDate(),
-                    new ResponseServer(serverInfoCopy),
-                    new ResponseContent(),
-                    new ResponseConnControl());
+            b.addAll(new ResponseDate(), new ResponseServer(serverInfoCopy), new ResponseContent(),
+              new ResponseConnControl());
             if (requestLast != null) {
-                for (final HttpRequestInterceptor i: requestLast) {
+                for (final HttpRequestInterceptor i : requestLast) {
                     b.addLast(i);
                 }
             }
             if (responseLast != null) {
-                for (final HttpResponseInterceptor i: responseLast) {
+                for (final HttpResponseInterceptor i : responseLast) {
                     b.addLast(i);
                 }
             }
@@ -354,7 +379,7 @@ public class ServerBootstrap {
         if (handlerMapperCopy == null) {
             final UriHttpRequestHandlerMapper reqistry = new UriHttpRequestHandlerMapper();
             if (handlerMap != null) {
-                for (final Map.Entry<String, HttpRequestHandler> entry: handlerMap.entrySet()) {
+                for (final Map.Entry<String, HttpRequestHandler> entry : handlerMap.entrySet()) {
                     reqistry.register(entry.getKey(), entry.getValue());
                 }
             }
@@ -371,9 +396,9 @@ public class ServerBootstrap {
             responseFactoryCopy = DefaultHttpResponseFactory.INSTANCE;
         }
 
-        final HttpService httpService = new HttpService(
-                httpProcessorCopy, connStrategyCopy, responseFactoryCopy, handlerMapperCopy,
-                this.expectationVerifier);
+        final HttpService httpService =
+          new HttpService(httpProcessorCopy, connStrategyCopy, responseFactoryCopy, handlerMapperCopy,
+            this.expectationVerifier);
 
         ServerSocketFactory serverSocketFactoryCopy = this.serverSocketFactory;
         if (serverSocketFactoryCopy == null) {
@@ -384,7 +409,8 @@ public class ServerBootstrap {
             }
         }
 
-        HttpConnectionFactory<? extends DefaultBHttpServerConnection> connectionFactoryCopy = this.connectionFactory;
+        HttpConnectionFactory<? extends DefaultBHttpServerConnection> connectionFactoryCopy =
+          this.connectionFactory;
         if (connectionFactoryCopy == null) {
             if (this.connectionConfig != null) {
                 connectionFactoryCopy = new DefaultBHttpServerConnectionFactory(this.connectionConfig);
@@ -398,15 +424,9 @@ public class ServerBootstrap {
             exceptionLoggerCopy = ExceptionLogger.NO_OP;
         }
 
-        return new HttpServer(
-                this.listenerPort > 0 ? this.listenerPort : 0,
-                this.localAddress,
-                this.socketConfig != null ? this.socketConfig : SocketConfig.DEFAULT,
-                serverSocketFactoryCopy,
-                httpService,
-                connectionFactoryCopy,
-                this.sslSetupHandler,
-                exceptionLoggerCopy);
+        return new HttpServer(this.listenerPort > 0 ? this.listenerPort : 0, this.localAddress,
+          this.socketConfig != null ? this.socketConfig : SocketConfig.DEFAULT, serverSocketFactoryCopy,
+          httpService, connectionFactoryCopy, this.sslSetupHandler, exceptionLoggerCopy);
     }
 
 }

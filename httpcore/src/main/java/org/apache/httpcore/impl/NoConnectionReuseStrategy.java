@@ -39,7 +39,8 @@ import org.apache.httpcore.protocol.HttpContext;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class NoConnectionReuseStrategy implements ConnectionReuseStrategy {
+public class NoConnectionReuseStrategy
+  implements ConnectionReuseStrategy {
 
     public static final NoConnectionReuseStrategy INSTANCE = new NoConnectionReuseStrategy();
 

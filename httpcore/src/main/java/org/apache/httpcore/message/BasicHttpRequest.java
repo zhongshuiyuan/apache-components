@@ -38,7 +38,9 @@ import org.apache.httpcore.util.Args;
  *
  * @since 4.0
  */
-public class BasicHttpRequest extends AbstractHttpMessage implements HttpRequest {
+public class BasicHttpRequest
+  extends AbstractHttpMessage
+  implements HttpRequest {
 
     private final String method;
     private final String uri;
@@ -46,8 +48,7 @@ public class BasicHttpRequest extends AbstractHttpMessage implements HttpRequest
     private RequestLine requestline;
 
     /**
-     * Creates an instance of this class using the given request method
-     * and URI.
+     * Creates an instance of this class using the given request method and URI.
      *
      * @param method request method.
      * @param uri request URI.
@@ -60,8 +61,7 @@ public class BasicHttpRequest extends AbstractHttpMessage implements HttpRequest
     }
 
     /**
-     * Creates an instance of this class using the given request method, URI
-     * and the HTTP protocol version.
+     * Creates an instance of this class using the given request method, URI and the HTTP protocol version.
      *
      * @param method request method.
      * @param uri request URI.

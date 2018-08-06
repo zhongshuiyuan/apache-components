@@ -27,6 +27,8 @@
 
 package org.apache.httpcore.entity;
 
+import org.apache.httpcore.util.Args;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,17 +37,15 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 
-import org.apache.httpcore.util.Args;
-
 /**
- * A streamed entity that obtains its content from a {@link Serializable}.
- * The content obtained from the {@link Serializable} instance can
- * optionally be buffered in a byte array in order to make the
- * entity self-contained and repeatable.
+ * A streamed entity that obtains its content from a {@link Serializable}. The content obtained from the
+ * {@link Serializable} instance can optionally be buffered in a byte array in order to make the entity
+ * self-contained and repeatable.
  *
  * @since 4.0
  */
-public class SerializableEntity extends AbstractHttpEntity {
+public class SerializableEntity
+  extends AbstractHttpEntity {
 
     private byte[] objSer;
 
@@ -55,8 +55,8 @@ public class SerializableEntity extends AbstractHttpEntity {
      * Creates new instance of this class.
      *
      * @param ser input
-     * @param bufferize tells whether the content should be
-     *        stored in an internal buffer
+     * @param bufferize tells whether the content should be stored in an internal buffer
+     *
      * @throws IOException in case of an I/O error
      */
     public SerializableEntity(final Serializable ser, final boolean bufferize) throws IOException {
@@ -96,7 +96,7 @@ public class SerializableEntity extends AbstractHttpEntity {
 
     @Override
     public long getContentLength() {
-        if (this.objSer ==  null) {
+        if (this.objSer == null) {
             return -1;
         } else {
             return this.objSer.length;

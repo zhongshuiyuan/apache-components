@@ -37,21 +37,20 @@ import org.apache.httpcore.config.SocketConfig;
 import org.apache.httpcore.params.HttpParams;
 import org.apache.httpcore.pool.AbstractConnPool;
 import org.apache.httpcore.pool.ConnFactory;
-import org.apache.httpcore.pool.ConnPool;
 
 /**
- * A very basic {@link ConnPool} implementation that
- * represents a pool of blocking {@link HttpClientConnection} connections
- * identified by an {@link HttpHost} instance. Please note this pool
- * implementation does not support complex routes via a proxy cannot
- * differentiate between direct and proxied connections.
+ * A very basic {@link org.apache.httpcore.pool.ConnPool} implementation that represents a pool of blocking
+ * {@link HttpClientConnection} connections identified by an {@link HttpHost} instance. Please note this pool
+ * implementation does not support complex routes via a proxy cannot differentiate between direct and proxied
+ * connections.
  *
  * @see HttpHost
  * @since 4.2
  */
 @SuppressWarnings("deprecation")
 @Contract(threading = ThreadingBehavior.SAFE_CONDITIONAL)
-public class BasicConnPool extends AbstractConnPool<HttpHost, HttpClientConnection, BasicPoolEntry> {
+public class BasicConnPool
+  extends AbstractConnPool<HttpHost, HttpClientConnection, BasicPoolEntry> {
 
     private static final AtomicLong COUNTER = new AtomicLong();
 
@@ -82,9 +81,7 @@ public class BasicConnPool extends AbstractConnPool<HttpHost, HttpClientConnecti
     }
 
     @Override
-    protected BasicPoolEntry createEntry(
-            final HttpHost host,
-            final HttpClientConnection conn) {
+    protected BasicPoolEntry createEntry(final HttpHost host, final HttpClientConnection conn) {
         return new BasicPoolEntry(Long.toString(COUNTER.getAndIncrement()), host, conn);
     }
 

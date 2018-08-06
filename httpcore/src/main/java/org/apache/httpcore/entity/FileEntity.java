@@ -27,20 +27,22 @@
 
 package org.apache.httpcore.entity;
 
+import org.apache.httpcore.util.Args;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.httpcore.util.Args;
-
 /**
  * A self contained, repeatable entity that obtains its content from a file.
  *
  * @since 4.0
  */
-public class FileEntity extends AbstractHttpEntity implements Cloneable {
+public class FileEntity
+  extends AbstractHttpEntity
+  implements Cloneable {
 
     protected final File file;
 

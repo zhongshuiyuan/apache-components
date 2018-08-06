@@ -30,17 +30,16 @@ package org.apache.httpcore.params;
 import java.util.Set;
 
 /**
- * Abstract base class for parameter collections.
- * Type specific setters and getters are mapped to the abstract,
- * generic getters and setters.
+ * Abstract base class for parameter collections. Type specific setters and getters are mapped to the
+ * abstract, generic getters and setters.
  *
  * @since 4.0
- *
- * @deprecated (4.3) use configuration classes provided 'org.apache.httpcore.config'
- *  and 'org.apache.httpcore.client.config'
+ * @deprecated (4.3) use configuration classes provided 'org.apache.httpcore.config' and
+ *   'org.apache.httpcore.client.config'
  */
 @Deprecated
-public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames {
+public abstract class AbstractHttpParams
+  implements HttpParams, HttpParamsNames {
 
     /**
      * Instantiates parameters.
@@ -55,7 +54,7 @@ public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames 
         if (param == null) {
             return defaultValue;
         }
-        return ((Long) param).longValue();
+        return ((Long)param).longValue();
     }
 
     @Override
@@ -70,7 +69,7 @@ public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames 
         if (param == null) {
             return defaultValue;
         }
-        return ((Integer) param).intValue();
+        return ((Integer)param).intValue();
     }
 
     @Override
@@ -85,7 +84,7 @@ public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames 
         if (param == null) {
             return defaultValue;
         }
-        return ((Double) param).doubleValue();
+        return ((Double)param).doubleValue();
     }
 
     @Override
@@ -100,7 +99,7 @@ public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames 
         if (param == null) {
             return defaultValue;
         }
-        return ((Boolean) param).booleanValue();
+        return ((Boolean)param).booleanValue();
     }
 
     @Override
@@ -120,15 +119,13 @@ public abstract class AbstractHttpParams implements HttpParams, HttpParamsNames 
     }
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * Dummy implementation - must be overridden by subclasses.
+     * {@inheritDoc} <p> Dummy implementation - must be overridden by subclasses.
      *
-     * @since 4.2
      * @throws UnsupportedOperationException - always
+     * @since 4.2
      */
     @Override
-    public Set<String> getNames(){
+    public Set<String> getNames() {
         throw new UnsupportedOperationException();
     }
 

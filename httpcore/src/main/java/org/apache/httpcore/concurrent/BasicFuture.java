@@ -35,14 +35,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Basic implementation of the {@link Future} interface. {@code BasicFuture}
- * can be put into a completed state by invoking any of the following methods:
- * {@link #cancel()}, {@link #failed(Exception)}, or {@link #completed(Object)}.
+ * Basic implementation of the {@link Future} interface. {@code BasicFuture} can be put into a completed state
+ * by invoking any of the following methods: {@link #cancel()}, {@link #failed(Exception)}, or {@link
+ * #completed(Object)}.
  *
  * @param <T> the future result type of an asynchronous operation.
+ *
  * @since 4.2
  */
-public class BasicFuture<T> implements Future<T>, Cancellable {
+public class BasicFuture<T>
+  implements Future<T>, Cancellable {
 
     private final FutureCallback<T> callback;
 
@@ -86,7 +88,7 @@ public class BasicFuture<T> implements Future<T>, Cancellable {
 
     @Override
     public synchronized T get(final long timeout, final TimeUnit unit)
-            throws InterruptedException, ExecutionException, TimeoutException {
+      throws InterruptedException, ExecutionException, TimeoutException {
         Args.notNull(unit, "Time unit");
         final long msecs = unit.toMillis(timeout);
         final long startTime = (msecs <= 0) ? 0 : System.currentTimeMillis();
@@ -96,7 +98,7 @@ public class BasicFuture<T> implements Future<T>, Cancellable {
         } else if (waitTime <= 0) {
             throw new TimeoutException();
         } else {
-            for (;;) {
+            for (; ; ) {
                 wait(waitTime);
                 if (this.completed) {
                     return getResult();
@@ -111,7 +113,7 @@ public class BasicFuture<T> implements Future<T>, Cancellable {
     }
 
     public boolean completed(final T result) {
-        synchronized(this) {
+        synchronized (this) {
             if (this.completed) {
                 return false;
             }
@@ -126,7 +128,7 @@ public class BasicFuture<T> implements Future<T>, Cancellable {
     }
 
     public boolean failed(final Exception exception) {
-        synchronized(this) {
+        synchronized (this) {
             if (this.completed) {
                 return false;
             }
@@ -142,7 +144,7 @@ public class BasicFuture<T> implements Future<T>, Cancellable {
 
     @Override
     public boolean cancel(final boolean mayInterruptIfRunning) {
-        synchronized(this) {
+        synchronized (this) {
             if (this.completed) {
                 return false;
             }

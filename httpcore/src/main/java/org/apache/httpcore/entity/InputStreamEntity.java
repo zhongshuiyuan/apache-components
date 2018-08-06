@@ -27,28 +27,28 @@
 
 package org.apache.httpcore.entity;
 
+import org.apache.httpcore.util.Args;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.httpcore.util.Args;
-
 /**
- * A streamed, non-repeatable entity that obtains its content from
- * an {@link InputStream}.
+ * A streamed, non-repeatable entity that obtains its content from an {@link InputStream}.
  *
  * @since 4.0
  */
-public class InputStreamEntity extends AbstractHttpEntity {
+public class InputStreamEntity
+  extends AbstractHttpEntity {
 
     private final InputStream content;
     private final long length;
 
     /**
-     * Creates an entity with an unknown length.
-     * Equivalent to {@code new InputStreamEntity(instream, -1)}.
+     * Creates an entity with an unknown length. Equivalent to {@code new InputStreamEntity(instream, -1)}.
      *
      * @param instream input stream
+     *
      * @throws IllegalArgumentException if {@code instream} is {@code null}
      * @since 4.3
      */
@@ -61,6 +61,7 @@ public class InputStreamEntity extends AbstractHttpEntity {
      *
      * @param instream input stream
      * @param length of the input stream, {@code -1} if unknown
+     *
      * @throws IllegalArgumentException if {@code instream} is {@code null}
      */
     public InputStreamEntity(final InputStream instream, final long length) {
@@ -68,11 +69,12 @@ public class InputStreamEntity extends AbstractHttpEntity {
     }
 
     /**
-     * Creates an entity with a content type and unknown length.
-     * Equivalent to {@code new InputStreamEntity(instream, -1, contentType)}.
+     * Creates an entity with a content type and unknown length. Equivalent to {@code new
+     * InputStreamEntity(instream, -1, contentType)}.
      *
      * @param instream input stream
      * @param contentType content type
+     *
      * @throws IllegalArgumentException if {@code instream} is {@code null}
      * @since 4.3
      */
@@ -84,6 +86,7 @@ public class InputStreamEntity extends AbstractHttpEntity {
      * @param instream input stream
      * @param length of the input stream, {@code -1} if unknown
      * @param contentType for specifying the {@code Content-Type} header, may be {@code null}
+     *
      * @throws IllegalArgumentException if {@code instream} is {@code null}
      * @since 4.2
      */
@@ -115,11 +118,9 @@ public class InputStreamEntity extends AbstractHttpEntity {
     }
 
     /**
-     * Writes bytes from the {@code InputStream} this entity was constructed
-     * with to an {@code OutputStream}.  The content length
-     * determines how many bytes are written.  If the length is unknown ({@code -1}), the
+     * Writes bytes from the {@code InputStream} this entity was constructed with to an {@code OutputStream}.
+     * The content length determines how many bytes are written.  If the length is unknown ({@code -1}), the
      * stream will be completely consumed (to the end of the stream).
-     *
      */
     @Override
     public void writeTo(final OutputStream outstream) throws IOException {

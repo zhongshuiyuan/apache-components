@@ -34,7 +34,8 @@ import org.apache.httpcore.io.HttpTransportMetrics;
  *
  * @since 4.0
  */
-public class HttpTransportMetricsImpl implements HttpTransportMetrics {
+public class HttpTransportMetricsImpl
+  implements HttpTransportMetrics {
 
     private long bytesTransferred = 0;
 

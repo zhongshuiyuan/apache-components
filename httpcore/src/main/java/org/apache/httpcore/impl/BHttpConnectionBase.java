@@ -27,18 +27,6 @@
 
 package org.apache.httpcore.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
-import java.util.concurrent.atomic.AtomicReference;
-
 import org.apache.httpcore.ConnectionClosedException;
 import org.apache.httpcore.Header;
 import org.apache.httpcore.HttpConnection;
@@ -68,13 +56,26 @@ import org.apache.httpcore.protocol.HTTP;
 import org.apache.httpcore.util.Args;
 import org.apache.httpcore.util.NetUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
+import java.util.concurrent.atomic.AtomicReference;
+
 /**
- * This class serves as a base for all {@link HttpConnection} implementations and provides
- * functionality common to both client and server HTTP connections.
+ * This class serves as a base for all {@link HttpConnection} implementations and provides functionality
+ * common to both client and server HTTP connections.
  *
  * @since 4.0
  */
-public class BHttpConnectionBase implements HttpConnection, HttpInetConnection {
+public class BHttpConnectionBase
+  implements HttpConnection, HttpInetConnection {
 
     private final SessionInputBufferImpl inbuffer;
     private final SessionOutputBufferImpl outbuffer;
@@ -89,39 +90,35 @@ public class BHttpConnectionBase implements HttpConnection, HttpInetConnection {
      *
      * @param buffersize buffer size. Must be a positive number.
      * @param fragmentSizeHint fragment size hint.
-     * @param chardecoder decoder to be used for decoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for byte to char conversion.
-     * @param charencoder encoder to be used for encoding HTTP protocol elements.
-     *   If {@code null} simple type cast will be used for char to byte conversion.
-     * @param messageConstraints Message constraints. If {@code null}
-     *   {@link MessageConstraints#DEFAULT} will be used.
-     * @param incomingContentStrategy incoming content length strategy. If {@code null}
-     *   {@link LaxContentLengthStrategy#INSTANCE} will be used.
-     * @param outgoingContentStrategy outgoing content length strategy. If {@code null}
-     *   {@link StrictContentLengthStrategy#INSTANCE} will be used.
+     * @param chardecoder decoder to be used for decoding HTTP protocol elements. If {@code null} simple
+     *   type cast will be used for byte to char conversion.
+     * @param charencoder encoder to be used for encoding HTTP protocol elements. If {@code null} simple
+     *   type cast will be used for char to byte conversion.
+     * @param messageConstraints Message constraints. If {@code null} {@link MessageConstraints#DEFAULT}
+     *   will be used.
+     * @param incomingContentStrategy incoming content length strategy. If {@code null} {@link
+     *   LaxContentLengthStrategy#INSTANCE} will be used.
+     * @param outgoingContentStrategy outgoing content length strategy. If {@code null} {@link
+     *   StrictContentLengthStrategy#INSTANCE} will be used.
      */
-    protected BHttpConnectionBase(
-            final int buffersize,
-            final int fragmentSizeHint,
-            final CharsetDecoder chardecoder,
-            final CharsetEncoder charencoder,
-            final MessageConstraints messageConstraints,
-            final ContentLengthStrategy incomingContentStrategy,
-            final ContentLengthStrategy outgoingContentStrategy) {
+    protected BHttpConnectionBase(final int buffersize, final int fragmentSizeHint,
+      final CharsetDecoder chardecoder, final CharsetEncoder charencoder,
+      final MessageConstraints messageConstraints, final ContentLengthStrategy incomingContentStrategy,
+      final ContentLengthStrategy outgoingContentStrategy) {
         super();
         Args.positive(buffersize, "Buffer size");
         final HttpTransportMetricsImpl inTransportMetrics = new HttpTransportMetricsImpl();
         final HttpTransportMetricsImpl outTransportMetrics = new HttpTransportMetricsImpl();
         this.inbuffer = new SessionInputBufferImpl(inTransportMetrics, buffersize, -1,
-                messageConstraints != null ? messageConstraints : MessageConstraints.DEFAULT, chardecoder);
-        this.outbuffer = new SessionOutputBufferImpl(outTransportMetrics, buffersize, fragmentSizeHint,
-                charencoder);
+          messageConstraints != null ? messageConstraints : MessageConstraints.DEFAULT, chardecoder);
+        this.outbuffer =
+          new SessionOutputBufferImpl(outTransportMetrics, buffersize, fragmentSizeHint, charencoder);
         this.messageConstraints = messageConstraints;
         this.connMetrics = new HttpConnectionMetricsImpl(inTransportMetrics, outTransportMetrics);
-        this.incomingContentStrategy = incomingContentStrategy != null ? incomingContentStrategy :
-            LaxContentLengthStrategy.INSTANCE;
-        this.outgoingContentStrategy = outgoingContentStrategy != null ? outgoingContentStrategy :
-            StrictContentLengthStrategy.INSTANCE;
+        this.incomingContentStrategy =
+          incomingContentStrategy != null ? incomingContentStrategy : LaxContentLengthStrategy.INSTANCE;
+        this.outgoingContentStrategy =
+          outgoingContentStrategy != null ? outgoingContentStrategy : StrictContentLengthStrategy.INSTANCE;
         this.socketHolder = new AtomicReference<Socket>();
     }
 
@@ -147,13 +144,12 @@ public class BHttpConnectionBase implements HttpConnection, HttpInetConnection {
     }
 
     /**
-     * Binds this connection to the given {@link Socket}. This socket will be
-     * used by the connection to send and receive data.
-     * <p>
-     * After this method's execution the connection status will be reported
-     * as open and the {@link #isOpen()} will return {@code true}.
+     * Binds this connection to the given {@link Socket}. This socket will be used by the connection to send
+     * and receive data. <p> After this method's execution the connection status will be reported as open and
+     * the {@link #isOpen()} will return {@code true}.
      *
      * @param socket the socket.
+     *
      * @throws IOException in case of an I/O error.
      */
     protected void bind(final Socket socket) throws IOException {
@@ -184,9 +180,7 @@ public class BHttpConnectionBase implements HttpConnection, HttpInetConnection {
         return this.socketHolder.get();
     }
 
-    protected OutputStream createOutputStream(
-            final long len,
-            final SessionOutputBuffer outbuffer) {
+    protected OutputStream createOutputStream(final long len, final SessionOutputBuffer outbuffer) {
         if (len == ContentLengthStrategy.CHUNKED) {
             return new ChunkedOutputStream(2048, outbuffer);
         } else if (len == ContentLengthStrategy.IDENTITY) {
@@ -201,9 +195,7 @@ public class BHttpConnectionBase implements HttpConnection, HttpInetConnection {
         return createOutputStream(len, this.outbuffer);
     }
 
-    protected InputStream createInputStream(
-            final long len,
-            final SessionInputBuffer inbuffer) {
+    protected InputStream createInputStream(final long len, final SessionInputBuffer inbuffer) {
         if (len == ContentLengthStrategy.CHUNKED) {
             return new ChunkedInputStream(inbuffer, this.messageConstraints);
         } else if (len == ContentLengthStrategy.IDENTITY) {

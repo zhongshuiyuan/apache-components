@@ -27,8 +27,7 @@
 package org.apache.httpcore.concurrent;
 
 /**
- * A {@code Cancellable} represents a process or an operation that can be
- * canceled.
+ * A {@code Cancellable} represents a process or an operation that can be canceled.
  *
  * @since 4.2
  */

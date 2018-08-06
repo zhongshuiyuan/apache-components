@@ -38,38 +38,34 @@ import org.apache.httpcore.util.Args;
  *
  * @since 4.0
  */
-public class BasicHeaderIterator implements HeaderIterator {
+public class BasicHeaderIterator
+  implements HeaderIterator {
 
     /**
-     * An array of headers to iterate over.
-     * Not all elements of this array are necessarily part of the iteration.
-     * This array will never be modified by the iterator.
-     * Derived implementations are expected to adhere to this restriction.
+     * An array of headers to iterate over. Not all elements of this array are necessarily part of the
+     * iteration. This array will never be modified by the iterator. Derived implementations are expected to
+     * adhere to this restriction.
      */
     protected final Header[] allHeaders;
 
 
     /**
-     * The position of the next header in {@link #allHeaders allHeaders}.
-     * Negative if the iteration is over.
+     * The position of the next header in {@link #allHeaders allHeaders}. Negative if the iteration is over.
      */
     protected int currentIndex;
 
 
     /**
-     * The header name to filter by.
-     * {@code null} to iterate over all headers in the array.
+     * The header name to filter by. {@code null} to iterate over all headers in the array.
      */
     protected String headerName;
-
 
 
     /**
      * Creates a new header iterator.
      *
-     * @param headers   an array of headers over which to iterate
-     * @param name      the name of the headers over which to iterate, or
-     *                  {@code null} for any
+     * @param headers an array of headers over which to iterate
+     * @param name the name of the headers over which to iterate, or {@code null} for any
      */
     public BasicHeaderIterator(final Header[] headers, final String name) {
         super();
@@ -82,11 +78,10 @@ public class BasicHeaderIterator implements HeaderIterator {
     /**
      * Determines the index of the next header.
      *
-     * @param pos      one less than the index to consider first,
-     *                  -1 to search for the first header
+     * @param pos one less than the index to consider first, -1 to search for the first header
      *
-     * @return  the index of the next header that matches the filter name,
-     *          or negative if there are no more headers
+     * @return the index of the next header that matches the filter name, or negative if there are no more
+     *   headers
      */
     protected int findNext(final int pos) {
         int from = pos;
@@ -94,7 +89,7 @@ public class BasicHeaderIterator implements HeaderIterator {
             return -1;
         }
 
-        final int to = this.allHeaders.length-1;
+        final int to = this.allHeaders.length - 1;
         boolean found = false;
         while (!found && (from < to)) {
             from++;
@@ -107,14 +102,13 @@ public class BasicHeaderIterator implements HeaderIterator {
     /**
      * Checks whether a header is part of the iteration.
      *
-     * @param index     the index of the header to check
+     * @param index the index of the header to check
      *
-     * @return  {@code true} if the header should be part of the
-     *          iteration, {@code false} to skip
+     * @return {@code true} if the header should be part of the iteration, {@code false} to skip
      */
     protected boolean filterHeader(final int index) {
         return (this.headerName == null) ||
-            this.headerName.equalsIgnoreCase(this.allHeaders[index].getName());
+               this.headerName.equalsIgnoreCase(this.allHeaders[index].getName());
     }
 
 
@@ -128,13 +122,12 @@ public class BasicHeaderIterator implements HeaderIterator {
     /**
      * Obtains the next header from this iteration.
      *
-     * @return  the next header in this iteration
+     * @return the next header in this iteration
      *
-     * @throws NoSuchElementException   if there are no more headers
+     * @throws NoSuchElementException if there are no more headers
      */
     @Override
-    public Header nextHeader()
-        throws NoSuchElementException {
+    public Header nextHeader() throws NoSuchElementException {
 
         final int current = this.currentIndex;
         if (current < 0) {
@@ -148,16 +141,14 @@ public class BasicHeaderIterator implements HeaderIterator {
 
 
     /**
-     * Returns the next header.
-     * Same as {@link #nextHeader nextHeader}, but not type-safe.
+     * Returns the next header. Same as {@link #nextHeader nextHeader}, but not type-safe.
      *
-     * @return  the next header in this iteration
+     * @return the next header in this iteration
      *
-     * @throws NoSuchElementException   if there are no more headers
+     * @throws NoSuchElementException if there are no more headers
      */
     @Override
-    public final Object next()
-        throws NoSuchElementException {
+    public final Object next() throws NoSuchElementException {
         return nextHeader();
     }
 
@@ -165,13 +156,11 @@ public class BasicHeaderIterator implements HeaderIterator {
     /**
      * Removing headers is not supported.
      *
-     * @throws UnsupportedOperationException    always
+     * @throws UnsupportedOperationException always
      */
     @Override
-    public void remove()
-        throws UnsupportedOperationException {
+    public void remove() throws UnsupportedOperationException {
 
-        throw new UnsupportedOperationException
-            ("Removing headers is not supported.");
+        throw new UnsupportedOperationException("Removing headers is not supported.");
     }
 }

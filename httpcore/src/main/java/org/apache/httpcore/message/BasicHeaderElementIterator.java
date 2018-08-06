@@ -42,7 +42,8 @@ import org.apache.httpcore.util.CharArrayBuffer;
  *
  * @since 4.0
  */
-public class BasicHeaderElementIterator implements HeaderElementIterator {
+public class BasicHeaderElementIterator
+  implements HeaderElementIterator {
 
     private final HeaderIterator headerIt;
     private final HeaderValueParser parser;
@@ -54,9 +55,7 @@ public class BasicHeaderElementIterator implements HeaderElementIterator {
     /**
      * Creates a new instance of BasicHeaderElementIterator
      */
-    public BasicHeaderElementIterator(
-            final HeaderIterator headerIterator,
-            final HeaderValueParser parser) {
+    public BasicHeaderElementIterator(final HeaderIterator headerIterator, final HeaderValueParser parser) {
         this.headerIt = Args.notNull(headerIterator, "Header iterator");
         this.parser = Args.notNull(parser, "Parser");
     }
@@ -73,9 +72,9 @@ public class BasicHeaderElementIterator implements HeaderElementIterator {
         while (this.headerIt.hasNext()) {
             final Header h = this.headerIt.nextHeader();
             if (h instanceof FormattedHeader) {
-                this.buffer = ((FormattedHeader) h).getBuffer();
+                this.buffer = ((FormattedHeader)h).getBuffer();
                 this.cursor = new ParserCursor(0, this.buffer.length());
-                this.cursor.updatePos(((FormattedHeader) h).getValuePos());
+                this.cursor.updatePos(((FormattedHeader)h).getValuePos());
                 break;
             } else {
                 final String value = h.getValue();

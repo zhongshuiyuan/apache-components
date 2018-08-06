@@ -27,13 +27,13 @@
 
 package org.apache.httpcore.message;
 
-import java.io.Serializable;
-
 import org.apache.httpcore.NameValuePair;
-import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.annotation.Contract;
+import org.apache.httpcore.annotation.ThreadingBehavior;
 import org.apache.httpcore.util.Args;
 import org.apache.httpcore.util.LangUtils;
+
+import java.io.Serializable;
 
 /**
  * Basic implementation of {@link NameValuePair}.
@@ -41,9 +41,8 @@ import org.apache.httpcore.util.LangUtils;
  * @since 4.0
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE)
-public class BasicNameValuePair implements NameValuePair, Cloneable, Serializable {
-
-    private static final long serialVersionUID = -6437800749411518984L;
+public class BasicNameValuePair
+  implements NameValuePair, Cloneable, Serializable {
 
     private final String name;
     private final String value;
@@ -91,9 +90,8 @@ public class BasicNameValuePair implements NameValuePair, Cloneable, Serializabl
             return true;
         }
         if (object instanceof NameValuePair) {
-            final BasicNameValuePair that = (BasicNameValuePair) object;
-            return this.name.equals(that.name)
-                  && LangUtils.equals(this.value, that.value);
+            final BasicNameValuePair that = (BasicNameValuePair)object;
+            return this.name.equals(that.name) && LangUtils.equals(this.value, that.value);
         }
         return false;
     }

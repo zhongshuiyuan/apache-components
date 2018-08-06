@@ -32,7 +32,8 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @since 4.4
  */
-class ThreadFactoryImpl implements ThreadFactory {
+class ThreadFactoryImpl
+  implements ThreadFactory {
 
     private final String namePrefix;
     private final ThreadGroup group;
@@ -50,7 +51,7 @@ class ThreadFactoryImpl implements ThreadFactory {
 
     @Override
     public Thread newThread(final Runnable target) {
-        return new Thread(this.group, target, this.namePrefix + "-"  + this.count.incrementAndGet());
+        return new Thread(this.group, target, this.namePrefix + "-" + this.count.incrementAndGet());
     }
 
 }

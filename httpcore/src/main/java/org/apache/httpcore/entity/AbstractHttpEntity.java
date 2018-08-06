@@ -27,21 +27,21 @@
 
 package org.apache.httpcore.entity;
 
-import java.io.IOException;
-
 import org.apache.httpcore.Header;
 import org.apache.httpcore.HttpEntity;
 import org.apache.httpcore.message.BasicHeader;
 import org.apache.httpcore.protocol.HTTP;
 
+import java.io.IOException;
+
 /**
- * Abstract base class for entities.
- * Provides the commonly used attributes for streamed and self-contained
+ * Abstract base class for entities. Provides the commonly used attributes for streamed and self-contained
  * implementations of {@link HttpEntity HttpEntity}.
  *
  * @since 4.0
  */
-public abstract class AbstractHttpEntity implements HttpEntity {
+public abstract class AbstractHttpEntity
+  implements HttpEntity {
 
     /**
      * Buffer size for output stream processing.
@@ -55,9 +55,8 @@ public abstract class AbstractHttpEntity implements HttpEntity {
     protected boolean chunked;
 
     /**
-     * Protected default constructor.
-     * The contentType, contentEncoding and chunked attributes of the created object are set to
-     * {@code null}, {@code null} and {@code false}, respectively.
+     * Protected default constructor. The contentType, contentEncoding and chunked attributes of the created
+     * object are set to {@code null}, {@code null} and {@code false}, respectively.
      */
     protected AbstractHttpEntity() {
         super();
@@ -65,11 +64,10 @@ public abstract class AbstractHttpEntity implements HttpEntity {
 
 
     /**
-     * Obtains the Content-Type header.
-     * The default implementation returns the value of the
-     * {@link #contentType contentType} attribute.
+     * Obtains the Content-Type header. The default implementation returns the value of the {@link
+     * #contentType contentType} attribute.
      *
-     * @return  the Content-Type header, or {@code null}
+     * @return the Content-Type header, or {@code null}
      */
     @Override
     public Header getContentType() {
@@ -78,11 +76,10 @@ public abstract class AbstractHttpEntity implements HttpEntity {
 
 
     /**
-     * Obtains the Content-Encoding header.
-     * The default implementation returns the value of the
-     * {@link #contentEncoding contentEncoding} attribute.
+     * Obtains the Content-Encoding header. The default implementation returns the value of the {@link
+     * #contentEncoding contentEncoding} attribute.
      *
-     * @return  the Content-Encoding header, or {@code null}
+     * @return the Content-Encoding header, or {@code null}
      */
     @Override
     public Header getContentEncoding() {
@@ -90,11 +87,10 @@ public abstract class AbstractHttpEntity implements HttpEntity {
     }
 
     /**
-     * Obtains the 'chunked' flag.
-     * The default implementation returns the value of the
-     * {@link #chunked chunked} attribute.
+     * Obtains the 'chunked' flag. The default implementation returns the value of the {@link #chunked
+     * chunked} attribute.
      *
-     * @return  the 'chunked' flag
+     * @return the 'chunked' flag
      */
     @Override
     public boolean isChunked() {
@@ -103,24 +99,20 @@ public abstract class AbstractHttpEntity implements HttpEntity {
 
 
     /**
-     * Specifies the Content-Type header.
-     * The default implementation sets the value of the
-     * {@link #contentType contentType} attribute.
+     * Specifies the Content-Type header. The default implementation sets the value of the {@link #contentType
+     * contentType} attribute.
      *
-     * @param contentType       the new Content-Type header, or
-     *                          {@code null} to unset
+     * @param contentType the new Content-Type header, or {@code null} to unset
      */
     public void setContentType(final Header contentType) {
         this.contentType = contentType;
     }
 
     /**
-     * Specifies the Content-Type header, as a string.
-     * The default implementation calls
-     * {@link #setContentType(Header) setContentType(Header)}.
+     * Specifies the Content-Type header, as a string. The default implementation calls {@link
+     * #setContentType(Header) setContentType(Header)}.
      *
-     * @param ctString     the new Content-Type header, or
-     *                     {@code null} to unset
+     * @param ctString the new Content-Type header, or {@code null} to unset
      */
     public void setContentType(final String ctString) {
         Header h = null;
@@ -132,24 +124,20 @@ public abstract class AbstractHttpEntity implements HttpEntity {
 
 
     /**
-     * Specifies the Content-Encoding header.
-     * The default implementation sets the value of the
-     * {@link #contentEncoding contentEncoding} attribute.
+     * Specifies the Content-Encoding header. The default implementation sets the value of the {@link
+     * #contentEncoding contentEncoding} attribute.
      *
-     * @param contentEncoding   the new Content-Encoding header, or
-     *                          {@code null} to unset
+     * @param contentEncoding the new Content-Encoding header, or {@code null} to unset
      */
     public void setContentEncoding(final Header contentEncoding) {
         this.contentEncoding = contentEncoding;
     }
 
     /**
-     * Specifies the Content-Encoding header, as a string.
-     * The default implementation calls
-     * {@link #setContentEncoding(Header) setContentEncoding(Header)}.
+     * Specifies the Content-Encoding header, as a string. The default implementation calls {@link
+     * #setContentEncoding(Header) setContentEncoding(Header)}.
      *
-     * @param ceString     the new Content-Encoding header, or
-     *                     {@code null} to unset
+     * @param ceString the new Content-Encoding header, or {@code null} to unset
      */
     public void setContentEncoding(final String ceString) {
         Header h = null;
@@ -161,18 +149,12 @@ public abstract class AbstractHttpEntity implements HttpEntity {
 
 
     /**
-     * Specifies the 'chunked' flag.
-     * <p>
-     * Note that the chunked setting is a hint only.
-     * If using HTTP/1.0, chunking is never performed.
-     * Otherwise, even if chunked is false, HttpClient must
-     * use chunk coding if the entity content length is
-     * unknown (-1).
-     * <p>
-     * The default implementation sets the value of the
-     * {@link #chunked chunked} attribute.
+     * Specifies the 'chunked' flag. <p> Note that the chunked setting is a hint only. If using HTTP/1.0,
+     * chunking is never performed. Otherwise, even if chunked is false, HttpClient must use chunk coding if
+     * the entity content length is unknown (-1). <p> The default implementation sets the value of the {@link
+     * #chunked chunked} attribute.
      *
-     * @param b         the new 'chunked' flag
+     * @param b the new 'chunked' flag
      */
     public void setChunked(final boolean b) {
         this.chunked = b;
@@ -182,8 +164,8 @@ public abstract class AbstractHttpEntity implements HttpEntity {
     /**
      * The default implementation does not consume anything.
      *
-     * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on that;
-     * otherwise call {@link #writeTo(java.io.OutputStream)} which is required to free the resources.
+     * @deprecated (4.1) Either use {@link #getContent()} and call {@link java.io.InputStream#close()} on
+     *   that; otherwise call {@link #writeTo(java.io.OutputStream)} which is required to free the resources.
      */
     @Override
     @Deprecated

@@ -26,14 +26,14 @@
  */
 package org.apache.httpcore.pool;
 
+import org.apache.httpcore.util.Args;
+import org.apache.httpcore.util.Asserts;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.concurrent.Future;
-
-import org.apache.httpcore.util.Args;
-import org.apache.httpcore.util.Asserts;
 
 abstract class RouteSpecificPool<T, C, E extends PoolEntry<T, C>> {
 
@@ -45,9 +45,9 @@ abstract class RouteSpecificPool<T, C, E extends PoolEntry<T, C>> {
     RouteSpecificPool(final T route) {
         super();
         this.route = route;
-        this.leased = new HashSet<E>();
-        this.available = new LinkedList<E>();
-        this.pending = new LinkedList<Future<E>>();
+        this.leased = new HashSet<>();
+        this.available = new LinkedList<>();
+        this.pending = new LinkedList<>();
     }
 
     protected abstract E createEntry(C conn);
@@ -151,15 +151,15 @@ abstract class RouteSpecificPool<T, C, E extends PoolEntry<T, C>> {
     }
 
     public void shutdown() {
-        for (final Future<E> future: this.pending) {
+        for (final Future<E> future : this.pending) {
             future.cancel(true);
         }
         this.pending.clear();
-        for (final E entry: this.available) {
+        for (final E entry : this.available) {
             entry.close();
         }
         this.available.clear();
-        for (final E entry: this.leased) {
+        for (final E entry : this.leased) {
             entry.close();
         }
         this.leased.clear();

@@ -34,9 +34,8 @@ import java.io.IOException;
  *
  * @since 4.0
  */
-public class ConnectionClosedException extends IOException {
-
-    private static final long serialVersionUID = 617550366255636674L;
+public class ConnectionClosedException
+  extends IOException {
 
     /**
      * Creates a new ConnectionClosedException with the specified detail message.
@@ -44,7 +43,7 @@ public class ConnectionClosedException extends IOException {
      * @param message The exception detail message
      */
     public ConnectionClosedException(final String message) {
-        super(message);
+        super(HttpException.clean(message));
     }
 
 }

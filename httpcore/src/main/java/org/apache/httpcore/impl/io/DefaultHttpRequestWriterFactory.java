@@ -42,7 +42,8 @@ import org.apache.httpcore.message.LineFormatter;
  * @since 4.3
  */
 @Contract(threading = ThreadingBehavior.IMMUTABLE_CONDITIONAL)
-public class DefaultHttpRequestWriterFactory implements HttpMessageWriterFactory<HttpRequest> {
+public class DefaultHttpRequestWriterFactory
+  implements HttpMessageWriterFactory<HttpRequest> {
 
     public static final DefaultHttpRequestWriterFactory INSTANCE = new DefaultHttpRequestWriterFactory();
 
