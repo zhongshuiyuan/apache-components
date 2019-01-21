@@ -30,8 +30,6 @@ import java.io.InputStream;
  * its associated instances of {@link FileItemStream}: By invoking
  * {@link java.util.Iterator#hasNext()} on the iterator, you discard all data,
  * which hasn't been read so far from the previous data.</p>
- *
- * @version $Id$
  */
 public interface FileItemStream extends FileItemHeadersSupport {
 
@@ -42,7 +40,7 @@ public interface FileItemStream extends FileItemHeadersSupport {
      * {@link java.util.Iterator#hasNext()} has been invoked on the
      * iterator, which created the {@link FileItemStream}.
      */
-    class ItemSkippedException extends IOException {
+    public static class ItemSkippedException extends IOException {
 
         /**
          * The exceptions serial version UID, which is being used
@@ -57,10 +55,10 @@ public interface FileItemStream extends FileItemHeadersSupport {
      * items contents.
      *
      * @return The input stream, from which the items data may
-     * be read.
+     *   be read.
      * @throws IllegalStateException The method was already invoked on
-     *                               this item. It is not possible to recreate the data stream.
-     * @throws IOException           An I/O error occurred.
+     * this item. It is not possible to recreate the data stream.
+     * @throws IOException An I/O error occurred.
      * @see ItemSkippedException
      */
     InputStream openStream() throws IOException;
@@ -70,7 +68,7 @@ public interface FileItemStream extends FileItemHeadersSupport {
      * not defined.
      *
      * @return The content type passed by the browser or <code>null</code> if
-     * not defined.
+     *         not defined.
      */
     String getContentType();
 
@@ -97,7 +95,7 @@ public interface FileItemStream extends FileItemHeadersSupport {
      * a simple form field.
      *
      * @return <code>true</code> if the instance represents a simple form
-     * field; <code>false</code> if it represents an uploaded file.
+     *         field; <code>false</code> if it represents an uploaded file.
      */
     boolean isFormField();
 

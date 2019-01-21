@@ -16,18 +16,16 @@
  */
 package org.apache.commons.fileupload.util;
 
-import org.apache.commons.fileupload.InvalidFileNameException;
-import org.apache.commons.io.IOUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.apache.commons.fileupload.InvalidFileNameException;
+import org.apache.commons.io.IOUtils;
+
 /**
  * Utility class for working with streams.
- *
- * @version $Id$
  */
 public final class Streams {
 

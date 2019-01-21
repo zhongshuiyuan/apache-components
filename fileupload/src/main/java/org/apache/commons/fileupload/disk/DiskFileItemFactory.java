@@ -16,11 +16,11 @@
  */
 package org.apache.commons.fileupload.disk;
 
+import java.io.File;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.io.FileCleaningTracker;
-
-import java.io.File;
 
 /**
  * <p>The default {@link org.apache.commons.fileupload.FileItemFactory}
@@ -57,7 +57,7 @@ import java.io.File;
  * {@link DiskFileItemFactory}. However, if you do use such a tracker,
  * then you must consider the following: Temporary files are automatically
  * deleted as soon as they are no longer needed. (More precisely, when the
- * corresponding instance of {@link File} is garbage collected.)
+ * corresponding instance of {@link java.io.File} is garbage collected.)
  * This is done by the so-called reaper thread, which is started and stopped
  * automatically by the {@link FileCleaningTracker} when there are files to be
  * tracked.
@@ -66,8 +66,6 @@ import java.io.File;
  * in the users guide of commons-fileupload.</p>
  *
  * @since FileUpload 1.1
- *
- * @version $Id$
  */
 public class DiskFileItemFactory implements FileItemFactory {
 
@@ -96,6 +94,12 @@ public class DiskFileItemFactory implements FileItemFactory {
      * <p>May be null, if tracking files is not required.</p>
      */
     private FileCleaningTracker fileCleaningTracker;
+
+    /**
+     * Default content charset to be used when no explicit charset
+     * parameter is provided by the sender.
+     */
+    private String defaultCharset = DiskFileItem.DEFAULT_CHARSET;
 
     // ----------------------------------------------------------- Constructors
 
@@ -130,7 +134,7 @@ public class DiskFileItemFactory implements FileItemFactory {
      *
      * @return The directory in which temporary files will be located.
      *
-     * @see #setRepository(File)
+     * @see #setRepository(java.io.File)
      *
      */
     public File getRepository() {
@@ -177,7 +181,7 @@ public class DiskFileItemFactory implements FileItemFactory {
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Create a new {@link DiskFileItem}
+     * Create a new {@link org.apache.commons.fileupload.disk.DiskFileItem}
      * instance from the supplied parameters and the local factory
      * configuration.
      *
@@ -190,10 +194,12 @@ public class DiskFileItemFactory implements FileItemFactory {
      *
      * @return The newly created file item.
      */
+    @Override
     public FileItem createItem(String fieldName, String contentType,
-                               boolean isFormField, String fileName) {
+            boolean isFormField, String fileName) {
         DiskFileItem result = new DiskFileItem(fieldName, contentType,
                 isFormField, fileName, sizeThreshold, repository);
+        result.setDefaultCharset(defaultCharset);
         FileCleaningTracker tracker = getFileCleaningTracker();
         if (tracker != null) {
             tracker.track(result.getTempFile(), result);
@@ -224,4 +230,21 @@ public class DiskFileItemFactory implements FileItemFactory {
         fileCleaningTracker = pTracker;
     }
 
+    /**
+     * Returns the default charset for use when no explicit charset
+     * parameter is provided by the sender.
+     * @return the default charset
+     */
+    public String getDefaultCharset() {
+        return defaultCharset;
+    }
+
+    /**
+     * Sets the default charset for use when no explicit charset
+     * parameter is provided by the sender.
+     * @param pCharset the default charset
+     */
+    public void setDefaultCharset(String pCharset) {
+        defaultCharset = pCharset;
+    }
 }

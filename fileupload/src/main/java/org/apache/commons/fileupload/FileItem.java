@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -28,9 +27,11 @@ import java.io.UnsupportedEncodingException;
  * <code>multipart/form-data</code> POST request.
  *
  * <p> After retrieving an instance of this class from a {@link
- * org.apache.commons.fileupload.FileUpload FileUpload} instance , you may
+ * org.apache.commons.fileupload.FileUpload FileUpload} instance (see
+ * {@link org.apache.commons.fileupload.servlet.ServletFileUpload
+ * #parseRequest(javax.servlet.http.HttpServletRequest)}), you may
  * either request all contents of the file at once using {@link #get()} or
- * request an {@link InputStream InputStream} with
+ * request an {@link java.io.InputStream InputStream} with
  * {@link #getInputStream()} and process the file without attempting to load
  * it into memory, which may come handy with large files.
  *
@@ -41,18 +42,17 @@ import java.io.UnsupportedEncodingException;
  * implementation of this interface to also implement
  * <code>javax.activation.DataSource</code> with minimal additional work.
  *
- * @version $Id$
  * @since 1.3 additionally implements FileItemHeadersSupport
  */
-public interface FileItem extends Serializable, FileItemHeadersSupport {
+public interface FileItem extends FileItemHeadersSupport {
 
     // ------------------------------- Methods from javax.activation.DataSource
 
     /**
-     * Returns an {@link InputStream InputStream} that can be
+     * Returns an {@link java.io.InputStream InputStream} that can be
      * used to retrieve the contents of the file.
      *
-     * @return An {@link InputStream InputStream} that can be
+     * @return An {@link java.io.InputStream InputStream} that can be
      *         used to retrieve the contents of the file.
      *
      * @throws IOException if an error occurs.
@@ -191,10 +191,10 @@ public interface FileItem extends Serializable, FileItemHeadersSupport {
     void setFormField(boolean state);
 
     /**
-     * Returns an {@link OutputStream OutputStream} that can
+     * Returns an {@link java.io.OutputStream OutputStream} that can
      * be used for storing the contents of the file.
      *
-     * @return An {@link OutputStream OutputStream} that can be used
+     * @return An {@link java.io.OutputStream OutputStream} that can be used
      *         for storing the contensts of the file.
      *
      * @throws IOException if an error occurs.

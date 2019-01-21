@@ -23,8 +23,6 @@ import java.io.InputStream;
 /**
  * An input stream, which limits its data size. This stream is
  * used, if the content length is unknown.
- *
- * @version $Id$
  */
 public abstract class LimitedInputStream extends FilterInputStream implements Closeable {
 
@@ -93,8 +91,8 @@ public abstract class LimitedInputStream extends FilterInputStream implements Cl
      *
      * @return     the next byte of data, or <code>-1</code> if the end of the
      *             stream is reached.
-     * @exception  IOException  if an I/O error occurs.
-     * @see        FilterInputStream#in
+     * @throws  IOException  if an I/O error occurs.
+     * @see        java.io.FilterInputStream#in
      */
     @Override
     public int read() throws IOException {
@@ -122,12 +120,12 @@ public abstract class LimitedInputStream extends FilterInputStream implements Cl
      * @return     the total number of bytes read into the buffer, or
      *             <code>-1</code> if there is no more data because the end of
      *             the stream has been reached.
-     * @exception  NullPointerException If <code>b</code> is <code>null</code>.
-     * @exception  IndexOutOfBoundsException If <code>off</code> is negative,
+     * @throws  NullPointerException If <code>b</code> is <code>null</code>.
+     * @throws  IndexOutOfBoundsException If <code>off</code> is negative,
      * <code>len</code> is negative, or <code>len</code> is greater than
      * <code>b.length - off</code>
-     * @exception  IOException  if an I/O error occurs.
-     * @see        FilterInputStream#in
+     * @throws  IOException  if an I/O error occurs.
+     * @see        java.io.FilterInputStream#in
      */
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
@@ -145,6 +143,7 @@ public abstract class LimitedInputStream extends FilterInputStream implements Cl
      * @return True, if the stream is closed, otherwise false.
      * @throws IOException An I/O error occurred.
      */
+    @Override
     public boolean isClosed() throws IOException {
         return closed;
     }
@@ -155,8 +154,8 @@ public abstract class LimitedInputStream extends FilterInputStream implements Cl
      * This
      * method simply performs <code>in.close()</code>.
      *
-     * @exception  IOException  if an I/O error occurs.
-     * @see        FilterInputStream#in
+     * @throws  IOException  if an I/O error occurs.
+     * @see        java.io.FilterInputStream#in
      */
     @Override
     public void close() throws IOException {

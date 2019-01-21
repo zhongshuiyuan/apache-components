@@ -16,8 +16,6 @@
  */
 package org.apache.commons.fileupload.util;
 
-import org.apache.commons.fileupload.FileItemHeaders;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,12 +25,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.fileupload.FileItemHeaders;
+
 /**
  * Default implementation of the {@link FileItemHeaders} interface.
  *
  * @since 1.2.1
- *
- * @version $Id$
  */
 public class FileItemHeadersImpl implements FileItemHeaders, Serializable {
 
@@ -50,6 +48,7 @@ public class FileItemHeadersImpl implements FileItemHeaders, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getHeader(String name) {
         String nameLower = name.toLowerCase(Locale.ENGLISH);
         List<String> headerValueList = headerNameToValueListMap.get(nameLower);
@@ -62,6 +61,7 @@ public class FileItemHeadersImpl implements FileItemHeaders, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Iterator<String> getHeaderNames() {
         return headerNameToValueListMap.keySet().iterator();
     }
@@ -69,6 +69,7 @@ public class FileItemHeadersImpl implements FileItemHeaders, Serializable {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Iterator<String> getHeaders(String name) {
         String nameLower = name.toLowerCase(Locale.ENGLISH);
         List<String> headerValueList = headerNameToValueListMap.get(nameLower);

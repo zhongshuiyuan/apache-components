@@ -16,8 +16,8 @@
  */
 package org.apache.commons.fileupload;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.IOException;
 
 /**
  * <p>Abstracts access to the request information needed for file uploads. This
@@ -25,8 +25,6 @@ import java.io.InputStream;
  * handled by FileUpload, such as servlets and portlets.</p>
  *
  * @since FileUpload 1.1
- *
- * @version $Id$
  */
 public interface RequestContext {
 
