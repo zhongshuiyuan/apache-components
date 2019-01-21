@@ -15,7 +15,7 @@ compile 'com.yanzhenjie.apache:fileupload:1.3.3'
 <dependency>
   <groupId>com.yanzhenjie.apache</groupId>
   <artifactId>fileupload</artifactId>
-  <version>1.3.3</version>
+  <version>1.4</version>
 </dependency>
 ```
 
